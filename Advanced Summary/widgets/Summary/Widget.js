@@ -22,13 +22,19 @@ define(["dojo/_base/declare",
     "./ClusterLayer",
     "esri/graphicsUtils",
     "dojo/on",
-    "widgets/Summary/c"
+    "widgets/Summary/c", 
+	"esri/toolbars/draw",
+	"esri/symbols/SimpleLineSymbol",
+	"esri/symbols/SimpleFillSymbol",
+	"esri/layers/GraphicsLayer", 
+	"esri/Color"
   ],
   function(declare, BaseWidget, LayerInfos, utils,
     dom, domStyle, domClass, domConstruct, domGeometry, dojoEvent, html,
     lang, array, xhr, query,
     geometryEngine, Graphic, FeatureLayer, Query, number, StatisticDefinition,
-    ClusterLayer, graphicsUtils, on, Counter) {
+    ClusterLayer, graphicsUtils, on, Counter, 
+	Draw, SimpleLineSymbol, SimpleFillSymbol, GraphicsLayer, Color) {
     //To create a widget, you need to derive from BaseWidget.
     return declare([BaseWidget], {
 
@@ -50,6 +56,9 @@ define(["dojo/_base/declare",
       visCount: 4,
       summaryIds: [],
       summaryFeatures: [],
+	  
+	  _geoFilterType: "extent", 
+	  geoFilterLayer: null, 
 
       postCreate: function() {
         this.inherited(arguments);
@@ -92,6 +101,31 @@ define(["dojo/_base/declare",
         this._processOperationalLayers();
 
         this.own(on(this.filterNode, "change", lang.hitch(this, this._setFilter)));
+		
+        // fill symbol used for freehand polygon
+        this._fillSymbol = new SimpleFillSymbol(
+          SimpleFillSymbol.STYLE_SOLID,
+          new SimpleLineSymbol(
+            SimpleLineSymbol.STYLE_SOLID,
+            new Color('#000'), 
+            1
+          ), 
+          new Color([255,255,0,0.25])
+        );		
+		this.geoFilterLayer = new GraphicsLayer({
+			id: this.baseClass + "_geoFilterLayer"
+		}); 
+		this.map.addLayer(this.geoFilterLayer); 
+		
+		this.own(on(this.extentFilter, "click", lang.hitch(this, function() {
+			this._setGeoFilter("extent");
+		}))); 
+		this.own(on(this.freehandPolygonFilter, "click", lang.hitch(this, function() {
+			this._setGeoFilter("freehandPolygon");
+		}))); 
+		
+		this._tb = new Draw(this.map);
+        this._tb.on("draw-end", lang.hitch(this, this.addFilterGraphic));
       },
 
       destroy: function() {
@@ -100,6 +134,10 @@ define(["dojo/_base/declare",
           //domConstruct.destroy(this.clusterLayer);
         }
         this._stopRefresh();
+		if (this.geoFilterLayer) {
+		  this.map.removeLayer(this.geoFilterLayer);
+		  this.geoFilterLayer.clear(); 
+		}
         this.inherited(arguments);
       },
 
@@ -144,6 +182,7 @@ define(["dojo/_base/declare",
       // update UI
       _updateUI: function(styleName) {
         this._getStyleColor(styleName);
+		
       },
 
       /*jshint unused:true */
@@ -537,12 +576,21 @@ define(["dojo/_base/declare",
         this.summaryIds = [];
         this.summaryFeatures = [];
         if (this.opLayer) {
-          var ext = this.map.extent;
-          var exts = ext.normalize();
-          if (exts.length > 1) {
-            var newExt = geometryEngine.union(exts);
-            ext = newExt.getExtent();
-          }
+          var ext = null; 
+		  if (this._geoFilterType == "freehandPolygon") {
+			  if (this.geoFilterLayer.graphics.length == 0) {
+				return; 
+			  } else {
+			    ext = this.geoFilterLayer.graphics[0].geometry; 
+			  }
+		  } else { // this._geoFilterType == "extent"
+			  ext = this.map.extent;
+			  var exts = ext.normalize();
+			  if (exts.length > 1) {
+				var newExt = geometryEngine.union(exts);
+				ext = newExt.getExtent();
+			  }
+		  }  
           if (this.opLayerIsFeatureCollection) {
             var features = [];
             var fld = this.filterField;
@@ -944,7 +992,39 @@ define(["dojo/_base/declare",
           var t = this.config.refreshInterval * 60 * 1000;
           this.interval = setInterval(lang.hitch(this, this._summarize), t);
         }
-      }
+      }, 
+	  
+	  _setGeoFilter: function(filterType) {
+		  domClass.remove(this.extentFilter, "selected"); 
+		  domClass.remove(this.freehandPolygonFilter, "selected"); 
+		  this.geoFilterLayer.clear();
+		  
+		  this._geoFilterType = filterType; 
+		  
+		  switch(filterType) {
+			  case "extent":
+				domClass.add(this.extentFilter, "selected");
+				this._tb.deactivate(); 
+				this.map.enableMapNavigation(); 
+				this._summarize(); 
+				break; 
+			  case "freehandPolygon":
+				domClass.add(this.freehandPolygonFilter, "selected"); 
+				this.map.disableMapNavigation();
+				this._tb.activate("freehandpolygon");
+				break;
+		  }
+	  }, 
+	  
+	  addFilterGraphic: function(evt) {
+		  //deactivate the toolbar and clear existing graphics 
+          this._tb.deactivate(); 
+          this.map.enableMapNavigation(); 
+		  
+		  this.geoFilterLayer.add(new Graphic(evt.geometry, this._fillSymbol));
+		  
+		  this._summarize(); 
+	  }
 
     });
   });

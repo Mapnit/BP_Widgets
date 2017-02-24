@@ -288,6 +288,28 @@
   color: #000000;
 }
 
+/* css for spatial filter */
+.draw-item{
+  width:48px;
+  height:48px;
+  background-repeat: no-repeat;
+  text-align: center;
+  float: left;
+  margin: 7px;
+}
+
+.extent-icon {
+  background-image: url(images/draw_extent.png); 
+}
+
+.freehand-polygon-icon {
+  background-image: url(images/draw_freehand_polygon.png);
+}
+
+.selected {
+  background-color: #C0C0C0;
+}
+
 @media only screen and (max-width: 500px) {
   #panelLabel {
     display: none !important;
