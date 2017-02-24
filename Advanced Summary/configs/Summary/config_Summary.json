@@ -1,0 +1,24 @@
+{
+  "displayCluster": false,
+  "showFeatureCount": true,
+  "featureCountLabel": "COUNNT",
+  "summaryLayer": {
+    "fields": [
+      {
+        "type": "SUM",
+        "label": "Powerbuilder",
+        "field": "PB"
+      },
+      {
+        "type": "AVG",
+        "label": "Elevation",
+        "field": "Elev"
+      }
+    ],
+    "id": "Wells_2818",
+    "name": "Wells",
+    "filterField": "Field",
+    "url": "Wells_2818"
+  },
+  "refreshInterval": 1
+}
