@@ -137,19 +137,25 @@ define(["dojo/_base/declare",
 		if (this.geoFilterLayer) {
 		  this.map.removeLayer(this.geoFilterLayer);
 		  this.geoFilterLayer.clear(); 
-		}
+		} 
         this.inherited(arguments);
       },
 
       onOpen: function() {
         this.inherited(arguments);
         this._updateLayerVisibility();
+		if (this.geoFilterLayer) {
+		  this.geoFilterLayer.setVisibility(true); 
+		} 
         this._summarize();
         this._startRefresh();
       },
 
       onClose: function() {
         this._updateLayerVisibility();
+		if (this.geoFilterLayer) {
+		  this.geoFilterLayer.setVisibility(false);
+		} 
         this._stopRefresh();
         this.inherited(arguments);
       },
