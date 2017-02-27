@@ -27,7 +27,8 @@ define(["dojo/_base/declare",
 	"esri/symbols/SimpleLineSymbol",
 	"esri/symbols/SimpleFillSymbol",
 	"esri/layers/GraphicsLayer", 
-	"esri/Color"
+	"esri/Color",
+	"dijit/form/NumberTextBox"
   ],
   function(declare, BaseWidget, LayerInfos, utils,
     dom, domStyle, domClass, domConstruct, domGeometry, dojoEvent, html,
@@ -76,6 +77,7 @@ define(["dojo/_base/declare",
 		} else {
 		  this.filterField = ""; 
 		}
+		this.refreshIntervalNode.value = this.config.refreshInterval; 		
       },
 
       startup: function() {
@@ -110,6 +112,8 @@ define(["dojo/_base/declare",
 
 		this.own(on(this.filterFieldNode, "change", lang.hitch(this, this._setFilterField))); 
         this.own(on(this.filterNode, "change", lang.hitch(this, this._setFilter)));
+		
+		this.own(on(this.refreshIntervalNode, "change", lang.hitch(this, this._startRefresh))); 
 		
         // fill symbol used for freehand polygon
         this._fillSymbol = new SimpleFillSymbol(
@@ -576,6 +580,7 @@ define(["dojo/_base/declare",
 
       // summarize
       _summarize: function() {
+		console.debug("running the summary"); 
         if (this.sumTimer) {
           clearTimeout(this.sumTimer);
           this.sumTimer = null;
@@ -1031,8 +1036,9 @@ define(["dojo/_base/declare",
       // start refresh
       _startRefresh: function() {
         this._stopRefresh();
-        if (this.config.refreshInterval) {
-          var t = this.config.refreshInterval * 60 * 1000;
+        if (this.refreshIntervalNode.value) {
+		  console.debug("set refresh interval to " + this.refreshIntervalNode.value); 
+          var t = this.refreshIntervalNode.value * 60 * 1000; // in minute
           this.interval = setInterval(lang.hitch(this, this._summarize), t);
         }
       }, 

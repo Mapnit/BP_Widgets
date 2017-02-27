@@ -44,8 +44,13 @@
       <div id="panelLabel" data-dojo-attach-point="labelNode"></div>
       <div id="panelClose" data-dojo-attach-event="onclick:_close"></div>
       <div id="panelFooterContent" data-dojo-attach-point="footerContentNode">
-        <span id="labelFilter">${nls.filter}</span>
+        <div id="panelRefreshInterval">
+	      <span id="labelRefresh">${nls.refresh}</span>
+		  <input data-dojo-type="dijit/form/NumberTextBox" data-dojo-attach-point="refreshIntervalNode" style="width:50px"/> 
+		  <span id="labelRefreshIntervalUnit">${nls.refreshIntervalUnit}</span>
+        </div>
         <div id="panelFilter">
+          <span id="labelFilter">${nls.filter}</span>
 		  <select id="selFilterField" data-dojo-attach-point="filterFieldNode"></select>
           <select id="selFilter" data-dojo-attach-point="filterNode"></select>
         </div>

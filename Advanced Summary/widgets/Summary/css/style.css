@@ -245,11 +245,36 @@
   text-align: left;
 }
 
+.jimu-widget-summary #panelRefreshInterval {
+  float: right;
+  position: relative;
+  margin: 5px 10px 5px 10px;
+  width: 160px;
+  height: 30px;
+  overflow: hidden;
+  background-color: #353535;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  border-radius: 4px;
+}
+
+.jimu-rtl .jimu-widget-summary #panelRefreshInterval {
+  float: left;
+}
+
+#labelRefresh {
+  display: inline-block;
+}
+
+#labelRefreshIntervalUnit {
+  display: inline-block;
+}
+
 .jimu-widget-summary #panelFilter {
   float: right;
   position: relative;
   margin: 5px 10px 5px 10px;
-  width: 300px;
+  width: 350px;
   height: 30px;
   overflow: hidden;
   background-color: #353535;
@@ -276,7 +301,7 @@
   color: #ffffff;
   outline: transparent;
   background: transparent;
-  width: 90px;
+  width: 100px;
   padding: 0px 0px 0px 5px;
   font-size: 14px;
   line-height: 1;
