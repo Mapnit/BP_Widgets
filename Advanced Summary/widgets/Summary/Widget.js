@@ -69,7 +69,13 @@ define(["dojo/_base/declare",
         this.showFeatureCount = this.config.showFeatureCount;
         this.featureCountLabel = this.config.featureCountLabel;
         this.displayCluster = this.config.displayCluster;
-        this.filterField = this.config.summaryLayer.filterField;
+		this.filterFields = this.config.summaryLayer.filterFields; 
+        //this.filterField = this.config.summaryLayer.filterField;
+		if (this.filterFields && this.filterFields.length > 0) {
+		  this.filterField = this.filterFields[0].value; // the first field is default
+		} else {
+		  this.filterField = ""; 
+		}
       },
 
       startup: function() {
@@ -99,7 +105,10 @@ define(["dojo/_base/declare",
         // Process operational layers
         this.opLayers = this.map.itemInfo.itemData.operationalLayers;
         this._processOperationalLayers();
+		
+		this._populateFilterFields(); 
 
+		this.own(on(this.filterFieldNode, "change", lang.hitch(this, this._setFilterField))); 
         this.own(on(this.filterNode, "change", lang.hitch(this, this._setFilter)));
 		
         // fill symbol used for freehand polygon
@@ -880,6 +889,7 @@ define(["dojo/_base/declare",
       },
 
       _populateOptions: function(array) {
+		domConstruct.empty(this.filterNode); 
         //TODO: Setup so it populates my array
         if (array.length > 0) {
           var list = this.filterNode;
@@ -955,6 +965,33 @@ define(["dojo/_base/declare",
           }
         }
       },
+	  
+	  _populateFilterFields: function() {
+		var array = this.filterFields; 
+        if (array.length > 0) {
+          var list = this.filterFieldNode; 
+          if (list === null) {
+            console.log("Filter search drop down not configured");
+            //return;
+          }
+          for (var i = 0; i < array.length; i++) {
+            var obj = array[i];
+            var value = obj.value;
+            var label = obj.label;
+            domConstruct.create("option", {
+              value: value,
+              innerHTML: label
+            }, list);
+          }
+        }		  
+	  }, 
+	  
+	  _setFilterField: function() {
+		var list = this.filterFieldNode; 
+		this.filterField = this.filterFields[list.selectedIndex].value; 
+		
+		this._populateFilterValues(); 
+	  },
 
       // close
       _close: function() {

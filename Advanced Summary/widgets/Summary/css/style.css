@@ -249,7 +249,7 @@
   float: right;
   position: relative;
   margin: 5px 10px 5px 10px;
-  width: 200px;
+  width: 300px;
   height: 30px;
   overflow: hidden;
   background-color: #353535;
@@ -266,11 +266,32 @@
   display: inline-block;
 }
 
-.jimu-widget-summary #selFilter {
+.jimu-widget-summary #selFilterField {
+	/*
   position: absolute;
   left: 0px;
   top: 0px;
   margin: 0px;
+    */
+  color: #ffffff;
+  outline: transparent;
+  background: transparent;
+  width: 90px;
+  padding: 0px 0px 0px 5px;
+  font-size: 14px;
+  line-height: 1;
+  border: none;
+  border-radius: 0;
+  height: 30px;
+}
+
+.jimu-widget-summary #selFilter {
+	/*
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 0px;
+     */
   color: #ffffff;
   outline: transparent;
   background: transparent;

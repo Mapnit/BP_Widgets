@@ -1,6 +1,37 @@
 {
-  "displayCluster": true,
+  "displayCluster": false,
   "showFeatureCount": true,
-  "featureCountLabel": "",
-  "summaryLayer": {}
+  "featureCountLabel": "COUNNT",
+  "summaryLayer": {
+    "fields": [
+      {
+        "type": "SUM",
+        "label": "Powerbuilder",
+        "field": "PB"
+      },
+      {
+        "type": "AVG",
+        "label": "Elevation",
+        "field": "Elev"
+      }
+    ],
+    "id": "Wells_2818",
+    "name": "Wells",
+    "filterField": "Field",
+	"filterFields": [{
+	  "value": "Field",
+	  "label": "Field"
+	}, {
+	  "value": "Operator",
+	  "label": "Operator"
+	}, {
+	  "value": "Basin",
+	  "label": "Basin"
+	}, {
+	  "value": "Type",
+	  "label": "Type"
+	}], 
+    "url": "Wells_2818"
+  },
+  "refreshInterval": 1
 }
