@@ -72,7 +72,7 @@ define(["dojo/_base/declare",
         this.displayCluster = this.config.displayCluster;
 		this.filterFields = this.config.summaryLayer.filterFields; 
 		if (this.filterFields && this.filterFields.length > 0) {
-		  this.filterField = this.filterFields[0].field; // the first field is default
+		  this.filterField = this.filterFields[0].value; // the first field is default
 		} else {
 		  this.filterField = ""; 
 		}
@@ -992,7 +992,7 @@ define(["dojo/_base/declare",
 	  
 	  _setFilterField: function() {
 		var list = this.filterFieldNode; 
-		this.filterField = this.filterFields[list.selectedIndex].field; 
+		this.filterField = this.filterFields[list.selectedIndex].value; 
 		
 		this._populateFilterValues(); 
 	  },

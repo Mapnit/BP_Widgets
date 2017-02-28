@@ -18,16 +18,16 @@
     "id": "Wells_2818",
     "name": "Wells",
 	"filterFields": [{
-	  "field": "Field",
+	  "value": "Field",
 	  "label": "Field"
 	}, {
-	  "field": "Operator",
+	  "value": "Operator",
 	  "label": "Operator"
 	}, {
-	  "field": "Basin",
+	  "value": "Basin",
 	  "label": "Basin"
 	}, {
-	  "field": "Type",
+	  "value": "Type",
 	  "label": "Type"
 	}], 
     "url": "Wells_2818"
