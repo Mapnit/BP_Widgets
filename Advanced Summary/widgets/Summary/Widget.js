@@ -71,9 +71,8 @@ define(["dojo/_base/declare",
         this.featureCountLabel = this.config.featureCountLabel;
         this.displayCluster = this.config.displayCluster;
 		this.filterFields = this.config.summaryLayer.filterFields; 
-        //this.filterField = this.config.summaryLayer.filterField;
 		if (this.filterFields && this.filterFields.length > 0) {
-		  this.filterField = this.filterFields[0].value; // the first field is default
+		  this.filterField = this.filterFields[0].field; // the first field is default
 		} else {
 		  this.filterField = ""; 
 		}
@@ -981,7 +980,7 @@ define(["dojo/_base/declare",
           }
           for (var i = 0; i < array.length; i++) {
             var obj = array[i];
-            var value = obj.value;
+            var value = obj.field;
             var label = obj.label;
             domConstruct.create("option", {
               value: value,
@@ -993,7 +992,7 @@ define(["dojo/_base/declare",
 	  
 	  _setFilterField: function() {
 		var list = this.filterFieldNode; 
-		this.filterField = this.filterFields[list.selectedIndex].value; 
+		this.filterField = this.filterFields[list.selectedIndex].field; 
 		
 		this._populateFilterValues(); 
 	  },
