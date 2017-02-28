@@ -2,6 +2,7 @@ define({
   root: ({
     selectLayer: "Select Summary Layer",
     filterField: "Summary Layer Filter Field",
+	addFilterField: "Add Filter Field", 
     count: "COUNT",
     sum: "SUM",
     min: "MIN",

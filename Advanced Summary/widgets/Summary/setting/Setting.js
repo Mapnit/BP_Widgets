@@ -24,6 +24,7 @@ define([
     'dojo/query',
     'dijit/_WidgetsInTemplateMixin',
     'dijit/form/Select',
+	'dijit/form/TextBox', 
     'dijit/form/ValidationTextBox',
     'jimu/BaseWidgetSetting',
     'jimu/dijit/Message',
@@ -33,7 +34,7 @@ define([
     declare, array, html, lang,
     domStyle, on, query,
     _WidgetsInTemplateMixin,
-    Select, ValidationTextBox,
+    Select, TextBox, ValidationTextBox,
     BaseWidgetSetting, Message) {
 
     return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
@@ -74,6 +75,14 @@ define([
             this.featureCountLabel.set('readOnly', false);
           } else {
             this.featureCountLabel.set('readOnly', true);
+          }
+        })));
+		
+		this.own(on(this.btnAddFilterField, 'click', lang.hitch(this, this._addFilterFieldRow))); 
+		this.own(on(this.filterTable, 'row-delete', lang.hitch(this, function(tr) {
+          if (tr.select) {
+            tr.select.destroy();
+            delete tr.select;
           }
         })));
 
@@ -176,7 +185,13 @@ define([
             field: fld.field
           });
         }));
-
+		this.filterFields = []; 
+        array.forEach(this.config.summaryLayer.filterFields, lang.hitch(this, function(fld) {
+          this.filterFields.push({
+            label: fld.label,
+            value: fld.value
+          });
+        }));
       },
 
       _createFeatureLayer: function(id) {
@@ -227,6 +242,7 @@ define([
         this._createFilter();
         this._loadSummaryConfig();
         this._setSummaryTable();
+		this._setFilterTable(); 
       },
 
       _setSummaryTable: function() {
@@ -237,6 +253,15 @@ define([
           }));
         }
       },
+	  
+	  _setFilterTable: function() {
+        this.filterTable.clear();
+        if (this.config.summaryLayer && this.config.summaryLayer.url === this.selectLayer.value) {
+          array.forEach(this.config.summaryLayer.filterFields, lang.hitch(this, function(field) {
+            this._populateFilterTableRow(field);
+          }));
+        }
+	  }, 
 
       _populateSummaryTableRow: function(fieldInfo) {
         var result = this.summaryTable.addRow({});
@@ -251,6 +276,17 @@ define([
         }
       },
 
+      _populateFilterTableRow: function(fieldInfo) {
+        var result = this.filterTable.addRow({});
+        if (result.success && result.tr) {
+          var tr = result.tr;
+          this._addFilterFields(tr);
+          this._addFilterLabel(tr);
+          tr.selectFields.set("value", fieldInfo.value);
+          tr.labelText.set("value", fieldInfo.label);
+        }
+      },
+	  
       // not used
       _setSelectedIndex: function(select, value) {
         var options = select.options;
@@ -269,6 +305,49 @@ define([
         }
       },
 
+      _addFilterFieldRow: function() {
+        var result = this.filterTable.addRow({});
+        if (result.success && result.tr) {
+          var tr = result.tr;
+          this._addFilterFields(tr);
+          this._addFilterLabel(tr);
+        }
+      },
+	  
+      _addFilterFields: function(tr) {
+        var fieldsOptions = lang.clone(this.filterFields);
+        var td = query('.simple-table-cell', tr)[0];
+        html.setStyle(td, "verticalAlign", "middle");
+        var fields = new Select({
+          style: {
+            width: "100%",
+            height: "30px"
+          },
+          options: fieldsOptions
+        });
+        fields.placeAt(td);
+        fields.startup();
+		fields.on("change", lang.hitch(this, function(selField) {
+		  array.forEach(this.filterFields, lang.hitch(this, function(fld) {})); 
+		})); 
+        tr.selectFields = fields;
+      },
+
+      _addFilterLabel: function(tr) {
+        var td = query('.simple-table-cell', tr)[1];
+        html.setStyle(td, "verticalAlign", "middle");
+        var labelTextBox = new TextBox({
+		  readonly: true, 
+          style: {
+            width: "100%",
+            height: "30px"
+          }
+        });
+        labelTextBox.placeAt(td);
+        labelTextBox.startup();
+        tr.labelText = labelTextBox;
+      },	  
+	  
       _addSummaryFieldRow: function() {
         var result = this.summaryTable.addRow({});
         if (result.success && result.tr) {
@@ -362,6 +441,22 @@ define([
                 filterField: this.filterSelect.valueNode.value,
                 url: option.value
               });
+			  
+			  trs = this.filterTable.getRows();
+			  flds = []; 
+			  array.forEach(trs, lang.hitch(this, function(tr) {
+				var selectFields = tr.selectFields;
+				var labelText = tr.labelText;
+				var field = {
+				  label: labelText.value,
+				  field: selectFields.value
+				};
+				flds.push(field);
+			  })); 
+			  
+			  lang.mixin(summaryLayer, {
+				filterFields: flds
+			  });
             }
           }));
         }
