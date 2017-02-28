@@ -915,6 +915,9 @@ define(["dojo/_base/declare",
             }, list);
           }
         }
+		
+		// set filter after the filter option is populated
+		this._setFilter(); 
       },
 
       // set filter
