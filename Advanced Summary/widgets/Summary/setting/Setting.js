@@ -434,7 +434,6 @@ define([
               lang.mixin(summaryLayer, {
                 id: option.value,
                 name: option.label,
-                filterField: this.filterSelect.valueNode.value,
                 url: option.value
               });
 			  
