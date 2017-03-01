@@ -47,6 +47,7 @@ define([
       summaryTypes: null,
       filterFields: null,
 	  filterFieldOptions: null, 
+	  filterTableRows: [], 
 
       postCreate: function() {
         this.inherited(arguments);
@@ -81,6 +82,11 @@ define([
 		
 		this.own(on(this.btnAddFilterField, 'click', lang.hitch(this, this._addFilterFieldRow))); 
 		this.own(on(this.filterTable, 'row-delete', lang.hitch(this, function(tr) {
+		  array.forEach(this.filterTableRows, lang.hitch(this, function(row, idx) {
+			if (row == tr) {
+			  this.filterTableRows.splice(idx, 1); 
+			}
+		  })); 
           if (tr.select) {
             tr.select.destroy();
             delete tr.select;
@@ -284,6 +290,8 @@ define([
           this._addFilterLabel(tr);
           tr.selectFields.set("value", fieldInfo.field);
           tr.labelText.set("value", fieldInfo.label);
+		  // keep the reference to the table row
+		  this.filterTableRows.unshift(tr); 
         }
       },
 	  
@@ -303,6 +311,8 @@ define([
           var tr = result.tr;
           this._addFilterFields(tr);
           this._addFilterLabel(tr);
+		  // keep the reference to the table row
+		  this.filterTableRows.unshift(tr); 
         }
       },
 	  
@@ -320,9 +330,12 @@ define([
         fields.placeAt(td);
         fields.startup();
 		fields.on("change", lang.hitch(this, function(selField) {
-		  array.forEach(this.filterFields, lang.hitch(this, function(fld) {
 			if (fld.value === selField) {
-			  console.debug(selField); 
+			  array.forEach(this.filterTableRows, lang.hitch(this, function(row) {
+				if (row.selectFields.get('value') === selField) {
+				  row.labelText.set("value", fld.label);
+				}
+			  })); 
 			}
 		  })); 
 		})); 
