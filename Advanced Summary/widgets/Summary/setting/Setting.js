@@ -330,6 +330,7 @@ define([
         fields.placeAt(td);
         fields.startup();
 		fields.on("change", lang.hitch(this, function(selField) {
+		  array.forEach(this.filterFieldOptions, lang.hitch(this, function(fld) {
 			if (fld.value === selField) {
 			  array.forEach(this.filterTableRows, lang.hitch(this, function(row) {
 				if (row.selectFields.get('value') === selField) {
