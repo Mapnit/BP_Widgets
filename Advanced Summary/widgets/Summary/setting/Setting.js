@@ -43,9 +43,10 @@ define([
 
       summaryLayer: null,
       summaryFields: null,
-      filterFields: null,
-      layerFields: null,
+      summaryFieldOptions: null,
       summaryTypes: null,
+      filterFields: null,
+	  filterFieldOptions: null, 
 
       postCreate: function() {
         this.inherited(arguments);
@@ -217,29 +218,28 @@ define([
 
       _populateSummaryTable: function(featureLayer) {
         var fields = featureLayer.fields;
-        this.filterFields = [];
-        this.filterFields.push({
+        this.filterFieldOptions = [];
+        this.filterFieldOptions.push({
           label: "-",
           value: ""
         });
-        this.layerFields = [];
+        this.summaryFieldOptions = [];
         array.forEach(fields, lang.hitch(this, function(field) {
           if (field.name !== featureLayer.objectIdField) {
-            this.filterFields.push({
+            this.filterFieldOptions.push({
               label: field.alias,
               value: field.name
             });
             if (field.type === "esriFieldTypeInteger" ||
               field.type === "esriFieldTypeDouble" ||
               field.type === "esriFieldTypeSmallInteger") {
-              this.layerFields.push({
+              this.summaryFieldOptions.push({
                 label: field.alias,
                 value: field.name
               });
             }
           }
         }));
-        this._createFilter();
         this._loadSummaryConfig();
         this._setSummaryTable();
 		this._setFilterTable(); 
@@ -297,14 +297,6 @@ define([
         });
       },
 
-      _createFilter: function() {
-        var filterOptions = lang.clone(this.filterFields);
-        this.filterSelect.set('options', filterOptions);
-        if (this.config.summaryLayer !== null) {
-          this.filterSelect.set("value", this.config.summaryLayer.filterField);
-        }
-      },
-
       _addFilterFieldRow: function() {
         var result = this.filterTable.addRow({});
         if (result.success && result.tr) {
@@ -315,7 +307,7 @@ define([
       },
 	  
       _addFilterFields: function(tr) {
-        var fieldsOptions = lang.clone(this.filterFields);
+        var fieldsOptions = lang.clone(this.filterFieldOptions);
         var td = query('.simple-table-cell', tr)[0];
         html.setStyle(td, "verticalAlign", "middle");
         var fields = new Select({
@@ -328,7 +320,11 @@ define([
         fields.placeAt(td);
         fields.startup();
 		fields.on("change", lang.hitch(this, function(selField) {
-		  array.forEach(this.filterFields, lang.hitch(this, function(fld) {})); 
+		  array.forEach(this.filterFields, lang.hitch(this, function(fld) {
+			if (fld.value === selField) {
+			  console.debug(selField); 
+			}
+		  })); 
 		})); 
         tr.selectFields = fields;
       },
@@ -377,7 +373,7 @@ define([
       },
 
       _addSummaryFields: function(tr) {
-        var fieldsOptions = lang.clone(this.layerFields);
+        var fieldsOptions = lang.clone(this.summaryFieldOptions);
         var td = query('.simple-table-cell', tr)[1];
         html.setStyle(td, "verticalAlign", "middle");
         var fields = new Select({
