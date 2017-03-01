@@ -43,7 +43,7 @@ define(["dojo/_base/declare",
       //templateString: template,
       /* jshint unused: true */
 
-      baseClass: 'jimu-widget-summary',
+      baseClass: 'lsg-widget-summary',
       name: 'Summary',
 
       clusterLayer: null,

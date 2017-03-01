@@ -39,7 +39,7 @@ define([
 
     return declare([BaseWidgetSetting, _WidgetsInTemplateMixin], {
       //these two properties is defined in the BaseWidget
-      baseClass: 'jimu-widget-summary-setting',
+      baseClass: 'lsg-widget-summary-setting',
 
       summaryLayer: null,
       summaryFields: null,

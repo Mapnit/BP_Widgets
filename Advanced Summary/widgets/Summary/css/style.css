@@ -1,4 +1,4 @@
-.jimu-widget-summary {
+.lsg-widget-summary {
   color: #ffffff !important;
   background-color: #4c4c4c;
   left: 0px !important;
@@ -9,7 +9,7 @@
   /*z-index: 100 !important;*/
 }
 
-.jimu-widget-summary .panelBottom {
+.lsg-widget-summary .panelBottom {
   position: absolute;
   width: 100%;
   height: 140px;
@@ -19,7 +19,7 @@
   padding: 0px;
 }
 
-.jimu-widget-summary #panelMessage {
+.lsg-widget-summary #panelMessage {
   position: absolute;
   top: 0px;
   text-align: center;
@@ -29,7 +29,7 @@
   display: none;
 }
 
-.jimu-widget-summary #panelMain {
+.lsg-widget-summary #panelMain {
   position: absolute;
   width: 100%;
   height: 80px;
@@ -39,7 +39,7 @@
   padding: 0px;
 }
 
-.jimu-widget-summary #panelContainer {
+.lsg-widget-summary #panelContainer {
   margin: auto;
   width: 100%;
   max-width: 880px;
@@ -48,7 +48,7 @@
   padding-top: 0px;
 }
 
-.jimu-widget-summary .col {
+.lsg-widget-summary .col {
   position: relative;
   width: 219px;
   height: 80px;
@@ -60,22 +60,22 @@
   float: left;
 }
 
-.jimu-rtl .jimu-widget-summary .col {
+.jimu-rtl .lsg-widget-summary .col {
   float: right;
 }
 
-.jimu-widget-summary .line {
+.lsg-widget-summary .line {
   border-left: 1px solid #ffffff;
   border-left: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.jimu-rtl .jimu-widget-summary .line {
+.jimu-rtl .lsg-widget-summary .line {
   border-left: none;
   border-right: 1px solid #ffffff;
   border-right: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.jimu-widget-summary .titleCounter {
+.lsg-widget-summary .titleCounter {
   position: absolute;
   top: 0px;
   left: 10px;
@@ -89,7 +89,7 @@
   overflow: hidden;
 }
 
-.jimu-widget-summary .counter {
+.lsg-widget-summary .counter {
   position: absolute;
   top: 20px;
   left: 7px;
@@ -98,7 +98,7 @@
   display: block;
 }
 
-.jimu-widget-summary .units {
+.lsg-widget-summary .units {
   position: absolute;
   bottom: 0px;
   left: 10px;
@@ -112,7 +112,7 @@
 }
 /* COUNTER */
 
-.jimu-widget-summary .counter_character {
+.lsg-widget-summary .counter_character {
   display: inline;
   float: left;
   position: relative;
@@ -120,28 +120,28 @@
   margin-right: 0px;
 }
 
-.jimu-widget-summary .counter_character_left {
+.lsg-widget-summary .counter_character_left {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.jimu-widget-summary .counter_character_inner {
+.lsg-widget-summary .counter_character_inner {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.jimu-widget-summary .counter_character_right {
+.lsg-widget-summary .counter_character_right {
   margin-left: 0px;
   margin-right: 0px;
 }
 
-.jimu-widget-summary .counter_marker {
+.lsg-widget-summary .counter_marker {
   position: relative;
   z-index: 10;
 }
 /* Navigation */
 
-.jimu-widget-summary #panelNav {
+.lsg-widget-summary #panelNav {
   position: absolute;
   width: 100%;
   height: 20px;
@@ -151,7 +151,7 @@
   line-height: 20px;
 }
 
-.jimu-widget-summary .navigation {
+.lsg-widget-summary .navigation {
   list-style-type: none;
   width: 60px;
   height: 20px;
@@ -159,26 +159,26 @@
   padding: 0px;
 }
 
-.jimu-widget-summary .navigation li {
+.lsg-widget-summary .navigation li {
   width: 20px;
   height: 20px;
   float: left;
   background: url(images/dot.png);
 }
 
-.jimu-rtl .jimu-widget-summary .navigation li {
+.jimu-rtl .lsg-widget-summary .navigation li {
   float: right;
 }
 
-.jimu-widget-summary .navigation li:hover {
+.lsg-widget-summary .navigation li:hover {
   background: url(images/doton.png);
 }
 
-.jimu-widget-summary .navigation li.active {
+.lsg-widget-summary .navigation li.active {
   background: url(images/doton.png);
 }
 
-.jimu-widget-summary #panelFooter {
+.lsg-widget-summary #panelFooter {
   position: absolute;
   bottom: 0px;
   left: 0px;
@@ -191,7 +191,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.jimu-widget-summary #panelLabel {
+.lsg-widget-summary #panelLabel {
   position: absolute;
   height: 40px;
   line-height: 40px;
@@ -201,12 +201,12 @@
   font-size: 16px;
 }
 
-.jimu-rtl .jimu-widget-summary #panelLabel {
+.jimu-rtl .lsg-widget-summary #panelLabel {
   text-align: right;
   padding: 0 10px 0;
 }
 
-.jimu-widget-summary #panelClose {
+.lsg-widget-summary #panelClose {
   position: absolute;
   left: auto;
   right: 0px;
@@ -222,13 +222,13 @@
   background-size: 18px;
 }
 
-.jimu-rtl .jimu-widget-summary #panelClose {
+.jimu-rtl .lsg-widget-summary #panelClose {
   position: absolute;
   left: 0px;
   right: auto;
 }
 
-.jimu-widget-summary #panelFooterContent {
+.lsg-widget-summary #panelFooterContent {
   position: absolute;
   left: auto;
   right: 24px;
@@ -238,14 +238,14 @@
   display: none;
 }
 
-.jimu-rtl .jimu-widget-summary #panelFooterContent {
+.jimu-rtl .lsg-widget-summary #panelFooterContent {
   position: absolute;
   left: 24px;
   right: auto;
   text-align: left;
 }
 
-.jimu-widget-summary #panelRefreshInterval {
+.lsg-widget-summary #panelRefreshInterval {
   float: right;
   position: relative;
   margin: 5px 10px 5px 10px;
@@ -258,7 +258,7 @@
   border-radius: 4px;
 }
 
-.jimu-rtl .jimu-widget-summary #panelRefreshInterval {
+.jimu-rtl .lsg-widget-summary #panelRefreshInterval {
   float: left;
 }
 
@@ -270,7 +270,7 @@
   display: inline-block;
 }
 
-.jimu-widget-summary #panelFilter {
+.lsg-widget-summary #panelFilter {
   float: right;
   position: relative;
   margin: 5px 10px 5px 10px;
@@ -283,7 +283,7 @@
   border-radius: 4px;
 }
 
-.jimu-rtl .jimu-widget-summary #panelFilter {
+.jimu-rtl .lsg-widget-summary #panelFilter {
   float: left;
 }
 
@@ -291,7 +291,7 @@
   display: inline-block;
 }
 
-.jimu-widget-summary #selFilterField {
+.lsg-widget-summary #selFilterField {
 	/*
   position: absolute;
   left: 0px;
@@ -310,7 +310,7 @@
   height: 30px;
 }
 
-.jimu-widget-summary #selFilter {
+.lsg-widget-summary #selFilter {
 	/*
   position: absolute;
   left: 0px;
@@ -329,7 +329,7 @@
   height: 30px;
 }
 
-.jimu-widget-summary option {
+.lsg-widget-summary option {
   background-color: #ffffff;
   color: #000000;
 }

@@ -25,7 +25,7 @@
     vertical-align: top;
 }
 
-.jimu-widget-summary-setting .btn-add-filter {
+.lsg-widget-summary-setting .btn-add-filter {
   display: inline-block;
   overflow: hidden;
   height: 24px;
@@ -37,7 +37,7 @@
   margin-top: 8px;
 }
 
-.jimu-widget-summary-setting .btn-add-filter .btn-add-icon {
+.lsg-widget-summary-setting .btn-add-filter .btn-add-icon {
   float: left;
   height: 100%;
   width: 14px;
@@ -46,7 +46,7 @@
   background-image: url(images/add.png);
 }
 
-.jimu-widget-summary-setting .btn-add-filter .btn-add-label {
+.lsg-widget-summary-setting .btn-add-filter .btn-add-label {
   float: left;
   height: 100%;
   line-height: 24px;
@@ -55,7 +55,7 @@
   text-decoration: underline;
 }
 
-.jimu-widget-summary-setting .btn-add-summary {
+.lsg-widget-summary-setting .btn-add-summary {
   display: inline-block;
   overflow: hidden;
   height: 24px;
@@ -67,7 +67,7 @@
   margin-top: 8px;
 }
 
-.jimu-widget-summary-setting .btn-add-summary .btn-add-icon {
+.lsg-widget-summary-setting .btn-add-summary .btn-add-icon {
   float: left;
   height: 100%;
   width: 14px;
@@ -76,7 +76,7 @@
   background-image: url(images/add.png);
 }
 
-.jimu-widget-summary-setting .btn-add-summary .btn-add-label {
+.lsg-widget-summary-setting .btn-add-summary .btn-add-label {
   float: left;
   height: 100%;
   line-height: 24px;
