@@ -190,7 +190,7 @@ define([
         array.forEach(this.config.summaryLayer.filterFields, lang.hitch(this, function(fld) {
           this.filterFields.push({
             label: fld.label,
-            value: fld.value
+            field: fld.field
           });
         }));
       },
@@ -282,7 +282,7 @@ define([
           var tr = result.tr;
           this._addFilterFields(tr);
           this._addFilterLabel(tr);
-          tr.selectFields.set("value", fieldInfo.value);
+          tr.selectFields.set("value", fieldInfo.field);
           tr.labelText.set("value", fieldInfo.label);
         }
       },
