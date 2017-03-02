@@ -259,7 +259,15 @@
           "relativeTo": "map"
         },
         "config": "configs/Summary/config_Summary.json"
-      }
+      },
+	  {
+        "uri": "widgets/ElevationProfile/Widget",
+        "version": "1.1.2",
+        "id": "widgets_ElevationProfile_Widget_20",
+        "name": "ElevationProfile",
+        "index": 5,
+        "IsController": false 
+	  }
     ],
     "groups": []
   },

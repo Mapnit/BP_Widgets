@@ -1,0 +1,96 @@
+{
+  "profileTaskUrl": "http://elevation.arcgis.com/arcgis/rest/services/Tools/ElevationSync/GPServer",
+  "identifyTaskUrl": "http://sampleserver3.arcgisonline.com/ArcGIS/rest/services/BloomfieldHillsMichigan/Parcels/MapServer",
+  "identifyOnGraphics": true,
+  "scalebarUnits": "feet",
+  "chartRenderingOptions": {
+    "chartTitleFontSize": 13,
+    "axisTitleFontSize": 11,
+    "axisLabelFontSize": 9,
+    "indicatorFontColor": "#eee",
+    "indicatorFillColor": "#777",
+    "titleFontColor": "#777",
+    "axisFontColor": "#777",
+    "axisMajorTickColor": "#777",
+    "skyTopColor": "#B0E0E6",
+    "skyBottomColor": "#4682B4",
+    "waterLineColor": "#eee",
+    "waterTopColor": "#ADD8E6",
+    "waterBottomColor": "#0000FF",
+    "elevationLineColor": "#D2B48C",
+    "elevationTopColor": "#8B4513",
+    "elevationBottomColor": "#CD853F",
+    "constrain": false
+  },
+  "layers": {
+    "excludelayer": [
+      {
+        "name": "Condos"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/Reference/World_Transportation/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/Reference/World_Reference_Overlay/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/Reference/World_Boundaries_and_Places/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/Reference/World_Boundaries_and_Places_Alternate/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Reference/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/Ocean_Basemap/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/USA_Topo_Maps/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Physical_Map/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Shaded_Relief/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Terrain_Base/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer"
+      },
+      {
+        "url": "http://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer"
+      }
+    ]
+  },
+  "symbols": {
+    "simplelinesymbol": {
+      "type": "esriSLS",
+      "style": "esriSLSSolid",
+      "color": [
+        68,
+        140,
+        203,
+        153
+      ],
+      "width": 2
+    }
+  }
+}

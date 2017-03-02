@@ -1,0 +1,29 @@
+<div>
+  <div data-dojo-attach-point="tabMain">
+    <div class="${baseClass} profile-tab-node" data-dojo-attach-point="tabNode1">
+      <label>${nls.descriptionlabel}</label>
+	  
+      <div style="padding-top:8px; left: 20px;">
+	  <div>
+		<a data-dojo-attach-event="onClick: _featureClick" href="#" ><div style="width: 35px;height: 35px; position:relative; margin-bottom:10px"><img src="widgets/ElevationProfile/images/featureclick.jpg" style="float: left;box-shadow:4px 2px 6px #010101; width: 35px;height: 35px; border: none;margin-right: 20px;"></div></a>
+	  </div>
+        <div style="top:40px;" data-dojo-attach-point="_measureNode" ></div>
+		
+      </div>
+    </div>
+    <div class="${baseClass} profile-tab-node" data-dojo-attach-point="tabNode2">
+      <div data-dojo-attach-point="progressbar"></div>
+      <div class="result-div" data-dojo-attach-point="divResult">
+        <label data-dojo-attach-point="divResultMessage">${nls.chartLabel}</label>
+      </div>
+      <div class="result-div">
+        <div data-dojo-attach-point="btnInfo"><div class="${baseClass}info-icon"><span>i</span></div>
+          <div class="${baseClass}-profile-info-label">${nls.profileinfo}</div>
+        </div>
+        <a style="float:right; margin-right:10px" href="#" data-dojo-attach-point="btnClear">${nls.clear}</a>
+      </div>
+      <div data-dojo-attach-point="_chartNode" class="${baseClass}ChartNode"/>
+    </div>
+  </div>
+  <div data-dojo-type="jimu/dijit/LoadingShelter" data-dojo-attach-point="shelter" data-dojo-props="hidden:true"></div>
+</div>
