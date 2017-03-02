@@ -16,7 +16,7 @@
   "portalUrl": "http://logic.maps.arcgis.com",
   "appId": "",
   "authorizedCrossOriginDomains": [],
-  "title": "Advanced Summary",
+  "title": "BP Widgets DevApp",
   "subtitle": "with Web AppBuilder for ArcGIS",
   "keepAppState": false,
   "logo": "images/app-logo.png",
@@ -218,7 +218,7 @@
       "right": 0,
       "bottom": 0
     },
-    "itemId": "1a9920db2efe420facab985503278132",
+    "itemId": "3e73635b02d14399815f911de7b0b72b",
     "mapOptions": {},
     "id": "map",
     "portalUrl": "http://logic.maps.arcgis.com"
@@ -300,8 +300,6 @@
   "isWebTier": false,
   "httpProxy": {
     "useProxy": true,
-    "alwaysUseProxy": false,
-    "url": "",
-    "rules": []
+    "url": "/proxy.js"
   }
 }

@@ -15,21 +15,21 @@
         "field": "Elev"
       }
     ],
-    "id": "Wells_2818",
+    "id": "Wells_8871",
     "name": "Wells",
-    "url": "Wells_2818",
+    "url": "Wells_8871",
     "filterFields": [
       {
-        "label": "Basin",
-        "field": "Basin"
+        "label": "Operator",
+        "field": "Operator"
       },
       {
         "label": "Field",
         "field": "Field"
       },
       {
-        "label": "Operator",
-        "field": "Operator"
+        "label": "Basin",
+        "field": "Basin"
       }
     ]
   },
