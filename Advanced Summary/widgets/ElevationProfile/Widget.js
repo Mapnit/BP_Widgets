@@ -1564,12 +1564,26 @@ define([
 	  
 	  isWholeServiceExcluded: function (serviceUrl) {
         var eURL = '';
-        for (var el = 0; el < this.excludeLayers.length; el++) {
-          eURL = this.excludeLayers[el].url;
-          if(serviceUrl && eURL && serviceUrl.toUpperCase() === eURL.toUpperCase()){
-            return true;
-          }
-        }
+		if (serviceUrl) {
+			serviceUrl = serviceUrl.toUpperCase(); 
+			for (var el = 0; el < this.excludeLayers.length; el++) {
+			  eURL = this.excludeLayers[el].url;
+			  if (eURL) { 
+				eURL = eURL.toUpperCase(); 
+				if (eURL.startsWith("HTTP") === true) {
+				  if (serviceUrl === eURL) {
+					return true; 
+				  }
+				} else {
+					// when the protocol omitted, exclude both HTTP and HTTPS
+					serviceUrl = serviceUrl.replace("HTTP:", "").replace("HTTPS:", ""); 
+					if (serviceUrl === eURL) {
+					  return true; 
+					}
+				}
+			  }
+			}
+		}
         return false;
       },
 
