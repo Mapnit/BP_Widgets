@@ -332,11 +332,9 @@ define([
 		  this._featureClick(); 
 		}))); 
 		this.own(on(this._featureSelectNode, 'mouseover', lang.hitch(this, function() {
-		  console.debug("_featureSelectNode mouseover");
 		  domClass.add(this._featureSelectNode, 'lsgHovered');
 		}))); 
 		this.own(on(this._featureSelectNode, 'mouseout', lang.hitch(this, function() {
-		  console.debug("_featureSelectNode mouseout");
 		  domClass.remove(this._featureSelectNode, 'lsgHovered');
 		}))); 
 		
