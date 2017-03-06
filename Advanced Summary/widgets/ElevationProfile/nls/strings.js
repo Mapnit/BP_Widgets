@@ -5,7 +5,7 @@ define({
 	selectFeatureUsage: "Use the Select tool to select a line feature on the map that you want to see the elevation profile for.",
     chartLabel: "Hover over or touch the Elevations Profile chart to display elevations and show location on map.",
     clear: "Clear",
-    measurelabel: "Measure",
+    measurelabel: "Profile Input",
     resultslabel: "Profile Result",
     profileinfo: "Profile Information",
     display: {
