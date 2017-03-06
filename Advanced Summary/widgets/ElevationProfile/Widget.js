@@ -47,6 +47,7 @@ define([
   'dijit/ProgressBar',
   'jimu/dijit/TabContainer',
   'jimu/dijit/Message',
+  'dojo/query', 
   'dojo/dom-construct',
   'dojo/dom-attr',
   'dojo/_base/window',
@@ -71,7 +72,7 @@ define([
     esriRequest, Geoprocessor, Polyline, SimpleLineSymbol, SimpleMarkerSymbol,
     Graphic, FeatureSet, LinearUnit, geodesicUtils, webMercatorUtils, Units, utils,
    // IdentifyTask, IdentifyParameters, Query, QueryTask,
-	Measurement, html, ProgressBar, TabContainer, Message, domConstruct, domAttr, baseWin, win, fx,
+	Measurement, html, ProgressBar, TabContainer, Message, dojoQuery, domConstruct, domAttr, baseWin, win, fx,
 	all, IdentifyTask, IdentifyParameters, Query, QueryTask, Point, Geometry, Extent) {
     return declare([BaseWidget, _OnDijitClickMixin, _WidgetsInTemplateMixin, Evented], {
 
@@ -198,6 +199,7 @@ define([
         }
         this._bindEvents();
         this._initMeasureTool();
+		this._initFeatureSelectTool();
 		
 		this.identifyServiceUrl = this.config.identifyTaskUrl;
 		this.excludeLayers = this.config.layers.excludelayer;
@@ -311,7 +313,34 @@ define([
 		if (distanceTooltip) {
 			distanceTooltip.title = "Draw Line";
 		}
+		
+		// disable infoWindow
+		this.map.setInfoWindowOnClick(false);
+		this.disableWebMapPopup(); 
       },
+	  
+	  // init the FeatureSelect button
+	  _initFeatureSelectTool: function() {
+		this.own(on(this._featureSelectNode, 'click', lang.hitch(this, function() {
+		  // check the feature select button
+		  domClass.add(this._featureSelectNode, 'lsgChecked');
+		  // set the result title
+		  var resultLabel = dojoQuery(".esriMeasurementResultLabel"); 
+		  if (resultLabel && resultLabel.length > 0) {
+			resultLabel[0].innerHTML = "Selected Feature"; 
+		  }	
+		  this._featureClick(); 
+		}))); 
+		this.own(on(this._featureSelectNode, 'mouseover', lang.hitch(this, function() {
+		  console.debug("_featureSelectNode mouseover");
+		  domClass.add(this._featureSelectNode, 'lsgHovered');
+		}))); 
+		this.own(on(this._featureSelectNode, 'mouseout', lang.hitch(this, function() {
+		  console.debug("_featureSelectNode mouseout");
+		  domClass.remove(this._featureSelectNode, 'lsgHovered');
+		}))); 
+		
+	  }, 
 
       /**
        * INITIALIZE ESRI MEASUREMENT DIJIT
@@ -391,6 +420,14 @@ define([
        * @private
        */
       _onMeasureClick: function () {
+		// uncheck the feature select button
+		domClass.remove(this._featureSelectNode, 'lsgChecked');
+		// set the result title
+		var resultLabel = dojoQuery(".esriMeasurementResultLabel"); 
+		if (resultLabel && resultLabel.length > 0) {
+		  resultLabel[0].innerHTML = "Measurement Result"; 
+		}
+		//
 		if (this.clickEvtWire) {
           this.clickEvtWire.remove();
         }
@@ -635,6 +672,8 @@ define([
 					 
 					 }
 				}*/
+			  //TODO - add attributes & highlight the line feature (the 1st one)
+			  
 		}
 			  
 		  }));
