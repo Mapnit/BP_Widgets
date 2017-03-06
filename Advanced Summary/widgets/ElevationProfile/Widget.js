@@ -427,6 +427,7 @@ define([
 		if (resultLabel && resultLabel.length > 0) {
 		  resultLabel[0].innerHTML = "Measurement Result"; 
 		}
+		domConstruct.empty(this._attributeNode); 
 		//
 		if (this.clickEvtWire) {
           this.clickEvtWire.remove();
@@ -649,17 +650,20 @@ define([
 		var tPromises = new all(promises);
           tPromises[0].then(lang.hitch(this, function(r){
 		if (r) {
+			  var firstResult; 
 			  if (r.constructor === Array) {
 				for (var i = 0; i < r.length; i++) { // IFG
 					if (r[i].feature && r[i].feature.geometry && ("polyline" === r[i].feature.geometry.type)) { // IFG
 						this.tabContainer.selectTab(this.nls.resultslabel);
 						this.displayProfileChart(r[i].feature.geometry);//vikram
+						firstResult = r[i]; 
 						break;
 					}
 				}
 			  } else if (r.features.constructor === Array && r.features.length > 0) {
 				  this.tabContainer.selectTab(this.nls.resultslabel);
 				  this.displayProfileChart(r.features[0].geometry);
+				  firstResult = r; 
 			  }
 			  
 			  /*if(r.constructor === Array){//vikram
@@ -673,7 +677,31 @@ define([
 					 }
 				}*/
 			  //TODO - add attributes & highlight the line feature (the 1st one)
-			  
+			  domConstruct.empty(this._attributeNode); 
+			  var attrTable = domConstruct.create("table"); 
+			  if (firstResult) {
+				  for (var fld in firstResult.fieldAliases) {
+					var row = domConstruct.create("tr"); 
+					domConstruct.create("td", {
+					  innerHTML: firstResult.fieldAliases[fld], 
+					  class: "lsgAttributeFieldCell"
+					}, row); 
+					array.forEach(firstResult.features, lang.hitch(this, function(feature) {
+					  domConstruct.create("td", {
+						innerHTML: feature.attributes[fld],
+						class: "lsgAttributeValueCell"
+					  }, row);  				  
+					})); 
+					domConstruct.place(row, attrTable); 
+				  };
+			  } else {
+				  var row = domConstruct.create("tr"); 
+					domConstruct.create("td", {
+					  innerHTML: this.nls.errors.NoFeatureSelected, 
+					  class: "lsgAttributeFieldCell"
+					}, row); 
+			  }
+			  domConstruct.place(attrTable, this._attributeNode); 
 		}
 			  
 		  }));

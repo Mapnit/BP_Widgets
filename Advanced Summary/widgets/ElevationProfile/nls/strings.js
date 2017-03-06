@@ -19,7 +19,8 @@ define({
     },
     errors: {
       InvalidConfiguration: "Invalid configuration.",
-      UnableToProcessResults: "Unable to process analysis results."
+      UnableToProcessResults: "Unable to process analysis results.", 
+	  NoFeatureSelected: "No feature selected"
     },
     widgetversion: 'Elevation Profile Widget Version Info',
     widgetverstr: 'Widget Version',
