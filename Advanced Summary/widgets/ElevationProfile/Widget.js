@@ -363,8 +363,8 @@ define([
             this.map.setInfoWindowOnClick(false);
             this.disableWebMapPopup();
           } else {
-            this.map.setInfoWindowOnClick(true);
-            this.enableWebMapPopup();
+            //this.map.setInfoWindowOnClick(true);
+            //this.enableWebMapPopup();
           }
         }));
         this.measureTool.startup();
