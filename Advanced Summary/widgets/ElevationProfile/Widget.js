@@ -324,6 +324,8 @@ define([
 		this.own(on(this._featureSelectNode, 'click', lang.hitch(this, function() {
 		  // check the feature select button
 		  domClass.add(this._featureSelectNode, 'lsgChecked');
+		  // change the usage tip 
+		  this._usageTip.innerHTML = this.nls.selectFeatureUsage; 
 		  // set the result title
 		  var resultLabel = dojoQuery(".esriMeasurementResultLabel"); 
 		  if (resultLabel && resultLabel.length > 0) {
@@ -420,6 +422,8 @@ define([
       _onMeasureClick: function () {
 		// uncheck the feature select button
 		domClass.remove(this._featureSelectNode, 'lsgChecked');
+		// change the usage tip 
+		this._usageTip.innerHTML = this.nls.measurementUsage; 
 		// set the result title
 		var resultLabel = dojoQuery(".esriMeasurementResultLabel"); 
 		if (resultLabel && resultLabel.length > 0) {
