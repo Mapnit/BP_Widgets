@@ -646,7 +646,7 @@ define([
 		}
 		
 		var tPromises = new all(promises);
-          tPromises[0].then(lang.hitch(this, function(r){
+        tPromises[0].then(lang.hitch(this, function(r){
 		if (r) {
 			  var firstResult; 
 			  if (r.constructor === Array) {
@@ -698,6 +698,7 @@ define([
 					  innerHTML: this.nls.errors.NoFeatureSelected, 
 					  class: "lsgAttributeFieldCell"
 					}, row); 
+				  domConstruct.place(row, attrTable); 
 			  }
 			  domConstruct.place(attrTable, this._attributeNode); 
 		}
