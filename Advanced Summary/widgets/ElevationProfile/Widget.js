@@ -201,6 +201,9 @@ define([
         this._initMeasureTool();
 		this._initFeatureSelectTool();
 		
+		domStyle.set(this._chartNode, 'visibility', 'hidden'); 
+		domStyle.set(this._resultInfoNode, 'visibility', 'hidden'); 
+		
 		this.identifyServiceUrl = this.config.identifyTaskUrl;
 		this.excludeLayers = this.config.layers.excludelayer;
 		//this.identifytolerance = this.config.identifytolerance;
@@ -461,6 +464,8 @@ define([
 
       _onMeasureEnd: function (evt) {
         if (evt.toolName === "distance") {
+		  domStyle.set(this._chartNode, 'visibility', 'visible');
+		  domStyle.set(this._resultInfoNode, 'visibility', 'visible'); 
           //Todo we should really list distance for both select and measure
           console.log(number.format(evt.values) + " " + evt.unitName);
           this.tabContainer.selectTab(this.nls.resultslabel);
@@ -556,7 +561,9 @@ define([
         //this.list.clear();
         //this.tabContainer.selectTab(this.nls.resultslabel);
         html.setStyle(this.progressBar.domNode, 'display', 'block');
-        html.setStyle(this.divResult, 'display', 'none');
+        //html.setStyle(this.divResult, 'display', 'none');
+		domStyle.set(this._chartNode, 'visibility', 'visible');
+		domStyle.set(this._resultInfoNode, 'visibility', 'visible'); 
 
         var layers = array.map(this.map.layerIds, lang.hitch(this, function (layerId) {
           return this.map.getLayer(layerId);
