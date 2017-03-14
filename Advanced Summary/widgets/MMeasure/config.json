@@ -1,0 +1,37 @@
+{
+  "mLayers": [
+    {
+      "layerName": "Wells_8871",
+      "dataSource": "SDE.Schema.Table_name"
+    },
+    {
+      "layerName": "Transmission_Pipeline_1368",
+      "dataSource": "WestWoodSDE_01.DBO.SMP2_ConstructionLine"
+    }
+  ], 
+  "calculateMServiceUrl": "http://gis2.logicsolutionsgroup.com:6080/arcgis/rest/services/Logic_Demo/AdvancedM/GPServer/Advanced%20M/execute", 
+  "startMarkerSymbol": {
+	"color": [0,255,0,64],
+	"size": 10,
+	"type": "esriSMS",
+	"style": "esriSMSCircle",
+	"outline": {
+	  "color": [0,0,0,255],
+	  "width": 1,
+	  "type": "esriSLS",
+	  "style": "esriSLSSolid"
+	}
+  }, 
+  "endMarkerSymbol": {
+	"color": [255,0,0,64],
+	"size": 10,
+	"type": "esriSMS",
+	"style": "esriSMSSquare",
+	"outline": {
+	  "color": [0,0,0,255],
+	  "width": 1,
+	  "type": "esriSLS",
+	  "style": "esriSLSSolid"
+	}
+  } 
+}
