@@ -159,6 +159,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 	_calculateMValue: function(measurePts) {
 	  console.debug("call the M-value service"); 
 	  var deferred = new Deferred();
+	  /*
 	  setTimeout(lang.hitch(this, function() {
 		var r = {
 		  "results": [{
@@ -175,14 +176,60 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 		};
 		deferred.resolve(r["results"]); 
 	  }), 500); 
-	  /*
+	   */
 	  var gp = new Geoprocessor(this.config.calculateMServiceUrl);
 	  var params = {
 		"StartPointX": measurePts[0].x,
 		"StartPointY": measurePts[0].y,
 		"EndPointX": measurePts[1].x,
 		"EndPointY": measurePts[1].y, 
-		"Baseline": 
+		"Line_Feature_Class": JSON.stringify({
+			 "displayFieldName": "",
+			 "hasZ": true,
+			 "hasM": true,
+			 "geometryType": "esriGeometryPolyline",
+			 "spatialReference": {
+			  "wkid": 102100,
+			  "latestWkid": 3857
+			 },
+			 "fields": [
+			  {
+			   "name": "OBJECTID",
+			   "type": "esriFieldTypeOID",
+			   "alias": "OBJECTID"
+			  },
+			  {
+			   "name": "StationSeriesID",
+			   "type": "esriFieldTypeString",
+			   "alias": "SeriesID",
+			   "length": 50
+			  },
+			  {
+			   "name": "OD",
+			   "type": "esriFieldTypeDouble",
+			   "alias": "OD"
+			  },
+			  {
+			   "name": "Description",
+			   "type": "esriFieldTypeString",
+			   "alias": "Description",
+			   "length": 100
+			  },
+			  {
+			   "name": "GlobalID",
+			   "type": "esriFieldTypeGlobalID",
+			   "alias": "GlobalID",
+			   "length": 38
+			  },
+			  {
+			   "name": "SHAPE_Length",
+			   "type": "esriFieldTypeDouble",
+			   "alias": "SHAPE_Length"
+			  }
+			 ],
+			 "features": [],
+			 "exceededTransferLimit": false
+			})
 	  };
 	  gp.execute(params, lang.hitch(this, function(results, messages) {
 		var mDistance = -1; 
@@ -190,11 +237,11 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 		  mDistance = Number(results[1]["value"]); 
 		}
 		//deferred.resolve({'firstPoint': {'M':0}, 'lastPoint': {'M':mDistance}}); 
-		deferred.resolve(r["results"]);
+		deferred.resolve(results);
 	  }), lang.hitch(this, function(error) {
 		deferred.reject(error); 
-	  }));
-	   */
+	  })); 
+	  
       return deferred.promise;
 	}, 
 	
