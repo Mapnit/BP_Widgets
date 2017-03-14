@@ -1,6 +1,7 @@
 define({
   root: ({	
     _widgetLabel: "M Measure",
+	labelMLayers: "Line Layers:", 
 	usageTip: "Click on a line to get M values.", 
 	labelAddMeasure: "Click for M Value", 
 	labelClear: "Clear", 

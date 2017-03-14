@@ -5,6 +5,7 @@ define([
   'dojo/_base/array',
   'dojo/dom-style',  
   'dojo/dom-class',
+  'dojo/dom-construct', 
   'jimu/BaseWidget',
   'dojo/on',
   'dojo/aspect',
@@ -22,7 +23,7 @@ define([
   'jimu/utils',
   'libs/storejs/store'
 ],
-function(declare, lang, array, domStyle, domClass, BaseWidget, on, aspect, Deferred, string,
+function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on, aspect, Deferred, string,
   Graphic, Point, GraphicsLayer, SimpleLineSymbol, SimpleMarkerSymbol, SpatialReference, Geoprocessor, MeasureNode, TileLayoutContainer, utils, store) {
   return declare([BaseWidget], {
     //these two properties is defined in the BaseWidget
@@ -35,9 +36,9 @@ function(declare, lang, array, domStyle, domClass, BaseWidget, on, aspect, Defer
 	
 	_graphicsLayer: null, 
 
-    //currentIndex: int
-    //    the current selected bookmark index
     currentIndex: -1,
+	
+	mLayerDS: null, 
 
     //use this flag to control delete button
     _canDelete: false,
@@ -51,7 +52,7 @@ function(declare, lang, array, domStyle, domClass, BaseWidget, on, aspect, Defer
 
       this.measureList = new TileLayoutContainer({
         strategy: 'fixWidth',
-        itemSize: {width: 220, height: 80}, //image size is: 100*60,
+        itemSize: {width: 240, height: 80}, //image size is: 100*60,
         hmargin: 15,
         vmargin: 5
       }, this.measureListNode);
@@ -61,6 +62,10 @@ function(declare, lang, array, domStyle, domClass, BaseWidget, on, aspect, Defer
 	  this._graphicsLayer = new GraphicsLayer({
 		id: this.baseClass + "_graphics"
 	  });
+	  
+	  this._populateMLayers(); 
+	  
+	  this.own(on(this.mLayerNode, "change", lang.hitch(this, this._setMLayer))); 
 
 	  this.own(on(this.btnClear, 'click', lang.hitch(this, function() {
 		this.measurePairs = []; 
@@ -128,6 +133,28 @@ function(declare, lang, array, domStyle, domClass, BaseWidget, on, aspect, Defer
       this.measureList.destroy();
       this.inherited(arguments);
     },
+	
+	_populateMLayers: function() {
+		var mLayers = this.config.mLayers; 
+        if (mLayers.length < 1) {
+		  console.log("mLayer drop down not configured");
+		} else {
+          for (var i = 0; i < mLayers.length; i++) {
+            var obj = mLayers[i];
+            var value = obj.dataSource;
+            var label = obj.layerName;
+            domConstruct.create("option", {
+              value: value,
+              innerHTML: label
+            }, this.mLayerNode);
+          }
+        } 
+	}, 
+	
+	_setMLayer: function() {
+	  var list = this.mLayerNode; 
+	  this.mLayerDS = this.config.mLayers[list.selectedIndex].dataSource; 
+	},
 
 	_calculateMValue: function(measurePts) {
 	  console.debug("call the M-value service"); 

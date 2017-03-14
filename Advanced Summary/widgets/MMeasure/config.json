@@ -1,15 +1,15 @@
 {
   "mLayers": [
     {
-      "layerName": "Wells_8871",
+      "layerName": "State Road",
       "dataSource": "SDE.Schema.Table_name"
     },
     {
-      "layerName": "Transmission_Pipeline_1368",
+      "layerName": "Transmission Pipeline",
       "dataSource": "WestWoodSDE_01.DBO.SMP2_ConstructionLine"
     }
   ], 
-  "calculateMServiceUrl": "http://gis2.logicsolutionsgroup.com:6080/arcgis/rest/services/Logic_Demo/AdvancedM/GPServer/Advanced%20M/execute", 
+  "calculateMServiceUrl": "http://gis2.logicsolutionsgroup.com:6080/arcgis/rest/services/Logic_Demo/AdvancedM/GPServer/Advanced%20M", 
   "startMarkerSymbol": {
 	"color": [0,255,0,64],
 	"size": 10,

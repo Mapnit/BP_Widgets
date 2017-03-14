@@ -5,6 +5,12 @@
   overflow: hidden;
   position: relative;
 }
+.lsg-widget-mmeasure .layer-section{
+  position: relative;
+  height: 30px;
+  margin-top: 7px;
+  overflow: visible;
+}
 .lsg-widget-mmeasure .add-section{
   position: relative;
   height: 30px;
@@ -65,7 +71,7 @@
 }
 .lsg-widget-mmeasure .measure-list{
   position: absolute;
-  top: 60px;
+  top: 90px;
   bottom: 35px;
   width: 100%;
 }
