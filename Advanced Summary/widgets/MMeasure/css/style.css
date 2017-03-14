@@ -1,0 +1,121 @@
+
+.lsg-widget-mmeasure{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.lsg-widget-mmeasure .add-section{
+  position: relative;
+  height: 30px;
+  margin-top: 7px;
+  overflow: visible;
+}
+.lsg-widget-mmeasure .add-measure {
+	float: left;
+	width: 35px;
+	height: 35px; 
+	border: none;
+	margin-right: 20px;
+	background-image: url("../images/featureclick.png");
+	background-size: 35px;
+	cursor:pointer;
+}
+.lsgChecked {
+	box-shadow:inset 4px 2px 6px #010101; 
+	margin-left: 3px;
+}
+.lsgHovered {
+	box-shadow:inset 4px 2px 6px #010101; 
+	margin-left: 3px;
+}
+.lsg-widget-mmeasure .clear-measure {
+	float:right; 
+	margin-right:10px;
+	margin-top: 20px; 
+	vertical-align: bottom;
+}
+.lsg-widget-mmeasure .input-measure-name{
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.lsg-widget-mmeasure .btn-add{
+  position: absolute;
+  right: 1px;
+  top: 1px;
+  bottom: 1px;
+  width: 30px;
+  z-index: 2;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  background-color: #d9dde0;
+  cursor: pointer;
+}
+.lsg-widget-mmeasure .btn-add .jimu-center-img{
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background-image: url(images/add.png);
+}
+.lsg-widget-mmeasure .jimu-state-error{
+  margin-top: 4px;
+  display: none; 
+}
+.lsg-widget-mmeasure .measure-list{
+  position: absolute;
+  top: 60px;
+  bottom: 35px;
+  width: 100%;
+}
+.lsg-widget-mmeasure .play-section{
+  overflow: hidden;
+  margin-top: 20px;
+  position: absolute;
+  bottom: 0;
+}
+.lsg-widget-mmeasure .jimu-btn{
+  float: none;
+  margin: auto;
+  width: 100%;
+}
+
+.FoldableTheme.green .lsg-widget-mmeasure .btn-add{
+  background-color: #80dbc5;
+}
+
+.FoldableTheme.cyan .lsg-widget-mmeasure .btn-add{
+  background-color: #d5d5d4;
+}
+
+.jimu-rtl .lsg-widget-mmeasure .btn-add{
+  left: 1px;
+  right: auto;
+}
+
+.lsg-measure-node {
+  cursor: pointer; 
+  border-left: 6px solid black;
+  background-color: #cccccc;
+  margin: 2px 5px 2px 5px; 
+}
+
+.lsg-state-selected {
+  background-color: #dddddd; 
+}
+
+.measure-header {
+}
+
+.measure-point-label {
+} 
+
+.measure-coordinate-value {
+}
+
+.measure-value-label {
+}
+
+.measure-value {
+}

@@ -1,0 +1,29 @@
+.lsg-widget-mmeasure-setting .btn-add-mlayer {
+  display: inline-block;
+  overflow: hidden;
+  height: 24px;
+  margin-left: 1px;
+  margin-bottom: 3px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #538ec8;
+  margin-top: 8px;
+}
+
+.lsg-widget-mmeasure-setting .btn-add-mlayer .btn-add-icon {
+  float: left;
+  height: 100%;
+  width: 14px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-image: url(images/add.png);
+}
+
+.lsg-widget-mmeasure-setting .btn-add-mlayer .btn-add-label {
+  float: left;
+  height: 100%;
+  line-height: 24px;
+  vertical-align: middle;
+  margin-left: 7px;
+  text-decoration: underline;
+}
