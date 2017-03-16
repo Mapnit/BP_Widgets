@@ -11,7 +11,7 @@ define({
 	endPoint: "End", 
 	xLabel: "X:", 
 	yLabel: "Y:", 
-	mLabel: "M:", 
+	mLabel: "M Distance:", 
     missingLayerInWebMap: "No Operational Layers in Web Map.",
     missingMLayerInConfig: "Missing m-enabled layer.", 
 	invalidMLayerInConfig: "Layer is not m-enabled"	, 
