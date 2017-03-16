@@ -111,16 +111,32 @@
   background-color: #dddddd; 
 }
 
-.measure-header {
+.measure-header-start {
+	padding-left: 20px;
+	padding-right: 10px; 
+	background-image: url("../images/start.png");
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+.measure-header-end {
+	padding-left: 20px;
+	padding-right: 10px; 
+	background-image: url("../images/end.png");
+	background-repeat: no-repeat;
+	background-position: left center;
 }
 
 .measure-point-label {
+	padding-right: 10px; 
 } 
 
 .measure-coordinate-value {
+	padding-right: 10px; 
 }
 
 .measure-value-label {
+	padding-right: 10px; 
 }
 
 .measure-value {
