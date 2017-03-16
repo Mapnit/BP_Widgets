@@ -11,7 +11,7 @@
   ], 
   "calculateMServiceUrl": "http://gis2.logicsolutionsgroup.com:6080/arcgis/rest/services/Logic_Demo/AdvancedM/GPServer/Advanced%20M", 
   "startMarkerSymbol": {
-	"color": [0,255,0,64],
+	"color": [0,255,0,255],
 	"size": 10,
 	"type": "esriSMS",
 	"style": "esriSMSCircle",
@@ -23,7 +23,7 @@
 	}
   }, 
   "endMarkerSymbol": {
-	"color": [255,0,0,64],
+	"color": [255,0,0,255],
 	"size": 10,
 	"type": "esriSMS",
 	"style": "esriSMSSquare",
