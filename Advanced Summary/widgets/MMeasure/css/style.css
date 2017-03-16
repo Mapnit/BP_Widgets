@@ -136,8 +136,9 @@
 }
 
 .measure-value-label {
-	padding-right: 10px; 
+	text-align: center; 
 }
 
 .measure-value {
+	text-align: center; 
 }
