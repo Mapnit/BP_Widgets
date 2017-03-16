@@ -345,7 +345,6 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 		this._calculateMValue(this._currentMeasurePair).then(
 		  lang.hitch(this, function(results) {
 			var mDistance = Number(results[1].value);
-			mDistance = Math.round(mDistance * 1000) / 1000; 
 			this._currentMeasurePair[0].m = 0; 
 			this._currentMeasurePair[1].m = mDistance; 
 			this._createMeasurePair(this._currentMeasurePair); 
