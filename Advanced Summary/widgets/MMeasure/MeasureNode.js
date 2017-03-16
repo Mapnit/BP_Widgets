@@ -55,7 +55,7 @@ function (declare, lang, array, domConstruct, _WidgetBase, _TemplatedMixin, on, 
 	  if (measurePt.name) {
 	    var header = domConstruct.create('td', {
 		  'innerHTML': utils.sanitizeHTML(measurePt.name), 
-		  'class': 'measure-header'
+		  'class': (idx%2==0?'measure-header-start':'measure-header-end')
 	    }, measureNode); 
 	  }
 	  var xyCell = domConstruct.create('td', {
