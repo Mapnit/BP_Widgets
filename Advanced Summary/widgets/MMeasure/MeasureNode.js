@@ -28,7 +28,7 @@ define([
 ],
 function (declare, lang, array, domConstruct, _WidgetBase, _TemplatedMixin, on, query, utils) {
   return declare([_WidgetBase, _TemplatedMixin], {
-    templateString: '<table class="lsg-measure-node"></table>',
+    templateString: '<table class="lsg-measure-node"></table>', 
     /**
     *options:
     * - measurePoints as array
@@ -36,11 +36,12 @@ function (declare, lang, array, domConstruct, _WidgetBase, _TemplatedMixin, on, 
     **/
     constructor: function(options, dom){
       /*jshint unused: false*/
+	  this.precision = options.precision || 10000; 
     },
     postCreate: function () {
 		
-	  array.forEach(this.measurePoints, lang.hitch(this, function(item) {
-		var measureNode = this._createMeasurePointNode(item);
+	  array.forEach(this.measurePoints, lang.hitch(this, function(item, i) {
+		var measureNode = this._createMeasurePointNode(item, i);
 		domConstruct.place(measureNode, this.domNode); 
 	  })); 
 
@@ -49,7 +50,7 @@ function (declare, lang, array, domConstruct, _WidgetBase, _TemplatedMixin, on, 
 	  this.own(on(this.domNode, 'mouseout', lang.hitch(this, this.unhighLight))); 
     },
 	
-	_createMeasurePointNode: function(measurePt) {
+	_createMeasurePointNode: function(measurePt, idx) {
 	  var measureNode = domConstruct.create('tr'); 
 	  if (measurePt.name) {
 	    var header = domConstruct.create('td', {
@@ -61,25 +62,35 @@ function (declare, lang, array, domConstruct, _WidgetBase, _TemplatedMixin, on, 
 		'class': 'measure-point-label'
 	  }, measureNode); 
 	  var xLabel = domConstruct.create('div', {
-		'innerHTML': measurePt.xLabel + " " + measurePt.x, 
+		'innerHTML': measurePt.xLabel + " " + (Math.round(measurePt.x * this.precision) / this.precision), 
 		'class': 'measure-coordinate-value'
 	  }, xyCell); 
 	  var yLabel = domConstruct.create('div', {
-		'innerHTML': measurePt.yLabel + " " + measurePt.y, 
+		'innerHTML': measurePt.yLabel + " " + (Math.round(measurePt.y * this.precision) / this.precision), 
 		'class': 'measure-coordinate-value'
 	  }, xyCell);
 	  var mCell = domConstruct.create('td', {
 		'class': 'measure-point-label'
 	  }, measureNode); 
-	  var mLabel = domConstruct.create('div', {
-		'innerHTML': measurePt.mLabel, 
-		'class': 'measure-value-label'
-	  }, mCell); 
-	  var mValue = domConstruct.create('div', {
-		'innerHTML': measurePt.m, 
-		'class': 'measure-value'
-	  }, mCell); 
-	  
+	  if (measurePt.m == 0) {
+	    var mLabel = domConstruct.create('div', {
+		  'innerHTML': '', 
+		  'class': 'measure-value-label'
+	    }, mCell); 
+	    var mValue = domConstruct.create('div', {
+		  'innerHTML': '-', 
+		  'class': 'measure-value'
+	    }, mCell); 		  
+	  } else {
+	    var mLabel = domConstruct.create('div', {
+		  'innerHTML': measurePt.mLabel, 
+		  'class': 'measure-value-label'
+	    }, mCell); 
+	    var mValue = domConstruct.create('div', {
+		  'innerHTML': (Math.round(measurePt.m * this.precision) / this.precision), 
+		  'class': 'measure-value'
+	    }, mCell); 
+	  }
 	  return measureNode; 
 	}, 
 
