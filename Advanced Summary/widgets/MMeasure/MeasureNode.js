@@ -50,6 +50,10 @@ function (declare, lang, array, domConstruct, _WidgetBase, _TemplatedMixin, on, 
 	  this.own(on(this.domNode, 'mouseout', lang.hitch(this, this.unhighLight))); 
     },
 	
+	_roundToPrecision: function(n) {
+	  return Math.round(n * this.precision) / this.precision;
+	}, 
+	
 	_createMeasurePointNode: function(measurePt, idx) {
 	  var measureNode = domConstruct.create('tr'); 
 	  if (measurePt.name) {
@@ -62,11 +66,11 @@ function (declare, lang, array, domConstruct, _WidgetBase, _TemplatedMixin, on, 
 		'class': 'measure-point-label'
 	  }, measureNode); 
 	  var xLabel = domConstruct.create('div', {
-		'innerHTML': measurePt.xLabel + " " + (Math.round(measurePt.x * this.precision) / this.precision), 
+		'innerHTML': measurePt.xLabel + " " + this._roundToPrecision(measurePt.x), 
 		'class': 'measure-coordinate-value'
 	  }, xyCell); 
 	  var yLabel = domConstruct.create('div', {
-		'innerHTML': measurePt.yLabel + " " + (Math.round(measurePt.y * this.precision) / this.precision), 
+		'innerHTML': measurePt.yLabel + " " + this._roundToPrecision(measurePt.y),  
 		'class': 'measure-coordinate-value'
 	  }, xyCell);
 	  var mCell = domConstruct.create('td', {
@@ -87,7 +91,7 @@ function (declare, lang, array, domConstruct, _WidgetBase, _TemplatedMixin, on, 
 		  'class': 'measure-value-label'
 	    }, mCell); 
 	    var mValue = domConstruct.create('div', {
-		  'innerHTML': (Math.round(measurePt.m * this.precision) / this.precision), 
+		  'innerHTML': this._roundToPrecision(measurePt.m), 
 		  'class': 'measure-value'
 	    }, mCell); 
 	  }
