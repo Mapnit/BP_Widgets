@@ -30,9 +30,11 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
     baseClass: 'lsg-widget-mmeasure',
     name: 'MMeasure',
 
-    measurePairs: [],
+    _measureArray: [],
 	
 	_currentMeasurePair: [], 
+	
+	_measureMode: null, 
 	
 	_graphicsLayer: null, 
 
@@ -68,7 +70,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 	  this.own(on(this.mLayerNode, "change", lang.hitch(this, this._setMLayer))); 
 
 	  this.own(on(this.btnClear, 'click', lang.hitch(this, function() {
-		this.measurePairs = []; 
+		this._measureArray = []; 
 		this._currentMeasurePair = []; 
 		this._graphicsLayer.clear(); 
 		this.displayMeasures();
@@ -108,9 +110,9 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
       //    use the local cache, or use the measures configured in the config.json
       var localBks = this._getLocalCache();
       if(localBks.length > 0){
-        this.measurePairs = localBks;
+        this._measureArray = localBks;
       }else{
-		this.measurePairs = [];
+		this._measureArray = [];
       }
 	  
 	  this.map.addLayer(this._graphicsLayer); 
@@ -121,7 +123,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
     onClose: function(){
       // summary:
       //    see description in the BaseWidget
-      this.measurePairs = [];
+      this._measureArray = [];
       this.currentIndex = -1;
 	  
 	  this.map.removeLayer(this._graphicsLayer); 
@@ -265,7 +267,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
       var items = [];
       this.measureList.empty();
 	  this._graphicsLayer.clear(); 
-      array.forEach(this.measurePairs, function(measurePair) {
+      array.forEach(this._measureArray, function(measurePair) {
         items.push(this._createMeasureNode(measurePair));
 		this.plotMeasuresOnMap(measurePair); 
       }, this);
@@ -327,7 +329,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
         store.remove(bName);
       }, this);
 
-      array.forEach(this.measurePairs, function(measurePair, i){
+      array.forEach(this._measureArray, function(measurePair, i){
         var key = this._getKeysKey() + '.' + i;
         keys.push(key);
         store.set(key, measurePair);
@@ -372,7 +374,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 	}, 
 
     _createMeasurePair: function(measurePair){
-      this.measurePairs.push(lang.clone(measurePair));
+      this._measureArray.push(lang.clone(measurePair));
       
 	  this._createMeasureNode(measurePair);
       this._saveAllToLocalCache();
@@ -385,10 +387,10 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
         return;
       }
 
-      array.some(this.measurePairs, function(b, i){
+      array.some(this._measureArray, function(b, i){
         // jshint unused:false
         if(i === this.currentIndex){
-		  this.measurePairs.splice(i, 1);
+		  this._measureArray.splice(i, 1);
           return true;
         }
       }, this);
@@ -412,7 +414,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
     _onMeasureClick: function(measurePair) {
       // summary:
       //    set the map extent or camera, depends on it's 2D/3D map
-      array.some(this.measurePairs, function(b, i){
+      array.some(this._measureArray, function(b, i){
         if(b.uid === measurePair.uid){
           this.currentIndex = i;
           return true;
