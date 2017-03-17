@@ -76,7 +76,7 @@ function (declare, lang, array, domConstruct, _WidgetBase, _TemplatedMixin, on, 
 	  var mCell = domConstruct.create('td', {
 		'class': 'measure-point-label'
 	  }, measureNode); 
-	  if (measurePt.m == 0) {
+	  if (!measurePt.m || measurePt.m == 0) {
 	    var mLabel = domConstruct.create('div', {
 		  'innerHTML': '', 
 		  'class': 'measure-value-label'

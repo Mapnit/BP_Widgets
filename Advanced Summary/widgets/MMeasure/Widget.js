@@ -248,12 +248,31 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 			})
 	  };
 	  gp.execute(params, lang.hitch(this, function(results, messages) {
-		var mDistance = -1; 
-		if (results && results.length === 2 && results[1]["value"]) {
-		  mDistance = Number(results[1]["value"]); 
+		var mStart, mEnd, mDistance; 
+		if (results && results.length === 2) {
+		  if (results[0].value) {
+			if (results[0].value.hasM == true) {
+			  var mp = (results[0].value.hasZ == true?3:2); 
+			  if(results[0].value.paths.length === 2) {
+				// first measure
+				var mStart = results[0].value.paths[0][0][mp]; 
+				// last measure
+				var pl = results[0].value.paths[1].length; 
+				var mEnd = results[0].value.paths[1][pl-1][mp]; 
+			  } 
+			} else {
+			  deferred.reject({'message':'no M value enabled'}); 
+			}
+		  }
+		  if (results[1].value) {
+			mDistance = Number(results[1].value);
+		  }
+		  if (mDistance || (mStart && mEnd)) {
+			deferred.resolve({'start':mStart, 'end':mEnd, 'distance':mDistance});
+		  }
 		}
-		//deferred.resolve({'firstPoint': {'M':0}, 'lastPoint': {'M':mDistance}}); 
-		deferred.resolve(results);
+		// 
+		deferred.reject({'message':'invalid calculation results'}); 
 	  }), lang.hitch(this, function(error) {
 		deferred.reject(error); 
 	  })); 
@@ -360,9 +379,16 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 	  if (this._currentMeasurePair.length % 2 == 0) {
 		this._calculateMValue(this._currentMeasurePair).then(
 		  lang.hitch(this, function(results) {
-			var mDistance = Number(results[1].value);
-			this._currentMeasurePair[0].m = 0; 
-			this._currentMeasurePair[1].m = mDistance; 
+			if (results.start && results.end) {
+			  this._currentMeasurePair[0].m = results.start; 
+			  this._currentMeasurePair[1].m = results.end;
+			} else if (results.distance) {
+			  this._currentMeasurePair[0].m = 0; 
+			  this._currentMeasurePair[1].m = results.distance; 
+			} else {
+			  console.error(this.nls.invalidCalculationResult); 
+			  return; 
+			}
 			this._createMeasurePair(this._currentMeasurePair); 
 			this._currentMeasurePair = []; 
 			

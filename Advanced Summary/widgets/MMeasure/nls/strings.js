@@ -12,10 +12,12 @@ define({
 	endPoint: "End", 
 	xLabel: "X:", 
 	yLabel: "Y:", 
-	mLabel: "M Distance:", 
+	mLabel: "M:", 
+	mDistanceLabel: "M Distance:", 
     missingLayerInWebMap: "No Operational Layers in Web Map.",
     missingMLayerInConfig: "Missing m-enabled layer.", 
 	invalidMLayerInConfig: "Layer is not m-enabled"	, 
-	calculationFailed: "failed to calculate m values"
+	calculationFailed: "failed to calculate m values",
+	invalidCalculationResult: "Invalid calculation result"
   })
 });
