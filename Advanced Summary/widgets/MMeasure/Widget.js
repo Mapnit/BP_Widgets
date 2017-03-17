@@ -179,30 +179,13 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 	_calculateMValue: function(measurePts) {
 	  console.debug("call the M-value service"); 
 	  var deferred = new Deferred();
-	  /*
-	  setTimeout(lang.hitch(this, function() {
-		var r = {
-		  "results": [{
-			"paramName": "Output_Graphic",
-			"dataType": "GPString",
-			"value": {}
-		  }, {
-		    "paramName": "Result_Length",
-		    "dataType": "GPString",
-		    "value": "-306.423999999999"
-		   }
-		 ],
-		 "messages": []
-		};
-		deferred.resolve(r["results"]); 
-	  }), 500); 
-	   */
 	  var gp = new Geoprocessor(this.config.calculateMServiceUrl);
 	  var params = {
 		"StartPointX": measurePts[0].x,
 		"StartPointY": measurePts[0].y,
 		"EndPointX": measurePts[1].x,
 		"EndPointY": measurePts[1].y, 
+		//TODO: required by the backend service
 		"Line_Feature_Class": JSON.stringify({
 			 "displayFieldName": "",
 			 "hasZ": true,
