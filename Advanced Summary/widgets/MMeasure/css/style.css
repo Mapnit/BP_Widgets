@@ -137,6 +137,14 @@
 	background-position: left center;
 }
 
+.measure-header-single {
+	padding-left: 20px;
+	padding-right: 10px; 
+	background-image: url("../images/single.png");
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
 .measure-point-label {
 	padding-right: 10px; 
 } 

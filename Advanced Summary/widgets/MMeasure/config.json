@@ -33,5 +33,17 @@
 	  "type": "esriSLS",
 	  "style": "esriSLSSolid"
 	}
-  } 
+  }, 
+  "pointMarkerSymbol": {
+	"color": [255,255,0,255],
+	"size": 10,
+	"type": "esriSMS",
+	"style": "esriSMSDiamond",
+	"outline": {
+	  "color": [0,0,0,255],
+	  "width": 1,
+	  "type": "esriSLS",
+	  "style": "esriSLSSolid"
+	}
+  }
 }

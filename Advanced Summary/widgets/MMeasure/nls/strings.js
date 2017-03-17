@@ -10,6 +10,7 @@ define({
     labelDelete: "Delete",
 	startPoint: "Start", 
 	endPoint: "End", 
+	singlePoint: "Point", 
 	xLabel: "X:", 
 	yLabel: "Y:", 
 	mLabel: "M:", 

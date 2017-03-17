@@ -39,11 +39,17 @@ function (declare, lang, array, domConstruct, _WidgetBase, _TemplatedMixin, on, 
 	  this.precision = options.precision || 10000; 
     },
     postCreate: function () {
-		
-	  array.forEach(this.measurePoints, lang.hitch(this, function(item, i) {
-		var measureNode = this._createMeasurePointNode(item, i);
-		domConstruct.place(measureNode, this.domNode); 
-	  })); 
+	  if (this.measurePoints.mode == 'line') {
+	    array.forEach(this.measurePoints.points, lang.hitch(this, function(item, i) {
+		  var measureNode = this._createMeasurePointNode(item, i);
+		  domConstruct.place(measureNode, this.domNode); 
+	    }));
+	  } else if (this.measurePoints.mode == 'point') {
+	    array.forEach([this.measurePoints.points[0]], lang.hitch(this, function(item, i) {
+		  var measureNode = this._createMeasurePointNode(item, i);
+		  domConstruct.place(measureNode, this.domNode); 
+	    })); 
+	  }
 
       this.own(on(this.domNode, 'click', lang.hitch(this, this.onClick)));
 	  this.own(on(this.domNode, 'mouseover', lang.hitch(this, this.highLight))); 
@@ -57,10 +63,17 @@ function (declare, lang, array, domConstruct, _WidgetBase, _TemplatedMixin, on, 
 	_createMeasurePointNode: function(measurePt, idx) {
 	  var measureNode = domConstruct.create('tr'); 
 	  if (measurePt.name) {
-	    var header = domConstruct.create('td', {
-		  'innerHTML': utils.sanitizeHTML(measurePt.name), 
-		  'class': (idx%2==0?'measure-header-start':'measure-header-end')
-	    }, measureNode); 
+		if (this.measurePoints.mode == 'line') {
+	      var header = domConstruct.create('td', {
+		    'innerHTML': utils.sanitizeHTML(measurePt.name), 
+		    'class': (idx%2==0?'measure-header-start':'measure-header-end')
+	      }, measureNode); 
+		} else if (this.measurePoints.mode == 'point') {
+	      var header = domConstruct.create('td', {
+		    'innerHTML': utils.sanitizeHTML(measurePt.name), 
+		    'class': 'measure-header-single'
+	      }, measureNode); 
+		}
 	  }
 	  var xyCell = domConstruct.create('td', {
 		'class': 'measure-point-label'

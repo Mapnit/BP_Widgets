@@ -32,7 +32,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 
     _measureArray: [],
 	
-	_currentMeasurePair: [], 
+	_currentMeasurePair: {}, 
 	
 	_measureMode: null, 
 	
@@ -73,7 +73,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 
 	  this.own(on(this.btnClear, 'click', lang.hitch(this, function() {
 		this._measureArray = []; 
-		this._currentMeasurePair = []; 
+		this._currentMeasurePair = {}; 
 		this._graphicsLayer.clear(); 
 		this.displayMeasures();
 	  }))); 
@@ -82,7 +82,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 		domClass.add(this.btnAddPointMeasure, 'lsgChecked');
 		domClass.remove(this.btnAddLineMeasure, 'lsgChecked');
 		this._measureMode = 'point'; 
-		this._currentMeasurePair = [];
+		this._currentMeasurePair = {};
 	  }))); 
 	  this.own(on(this.btnAddPointMeasure, 'mouseover', lang.hitch(this, function() {
 		domClass.add(this.btnAddPointMeasure, 'lsgHovered');
@@ -95,7 +95,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 		domClass.add(this.btnAddLineMeasure, 'lsgChecked');
 		domClass.remove(this.btnAddPointMeasure, 'lsgChecked');
 		this._measureMode = 'line'; 
-		this._currentMeasurePair = [];
+		this._currentMeasurePair = {};
 	  }))); 
 	  this.own(on(this.btnAddLineMeasure, 'mouseover', lang.hitch(this, function() {
 		domClass.add(this.btnAddLineMeasure, 'lsgHovered');
@@ -285,12 +285,20 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 	
 	plotMeasuresOnMap: function(measurePair) {
 		var startMarker = new SimpleMarkerSymbol(this.config.startMarkerSymbol);
-		var endMarker = new SimpleMarkerSymbol(this.config.endMarkerSymbol);		
-		array.forEach(measurePair, lang.hitch(this, function(mPt, i) {
-			this._graphicsLayer.add(new Graphic(
-			  new Point(mPt.x, mPt.y, mPt.spatialReference), 
-			  i%2==0?startMarker:endMarker)
-			);
+		var endMarker = new SimpleMarkerSymbol(this.config.endMarkerSymbol);
+		var pointMarker = new SimpleMarkerSymbol(this.config.pointMarkerSymbol);
+		array.forEach(measurePair.points, lang.hitch(this, function(mPt, i) {
+			if (measurePair.mode == 'line') {
+			  this._graphicsLayer.add(new Graphic(
+			    new Point(mPt.x, mPt.y, mPt.spatialReference), 
+			    i%2==0?startMarker:endMarker)
+			  );
+			} else if (measurePair.mode == 'point') {
+			  this._graphicsLayer.add(new Graphic(
+			    new Point(mPt.x, mPt.y, mPt.spatialReference), 
+			    pointMarker)
+			  );
+			}
 		})); 
 	}, 
 
@@ -306,13 +314,16 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 
     _createMeasureNode: function(measurePair) {
 
-	  array.forEach(measurePair, lang.hitch(this, function(mPt, idx) {
+	  array.forEach(measurePair.points, lang.hitch(this, function(mPt, idx) {
 	    if (!mPt.name) {
-		  mPt.name = (idx%2==0?this.nls.startPoint:this.nls.endPoint); 
-		  mPt.xLabel = this.nls.xLabel; 
-		  mPt.yLabel = this.nls.yLabel; 
-		  mPt.mLabel = this.nls.mLabel; 
+		  if (measurePair.mode == 'line')
+		    mPt.name = (idx%2==0?this.nls.startPoint:this.nls.endPoint); 
+		  else if (measurePair.mode == 'point')
+			mPt.name = this.nls.singlePoint; 
 		}
+		mPt.xLabel = this.nls.xLabel; 
+		mPt.yLabel = this.nls.yLabel; 
+		mPt.mLabel = this.nls.mLabel; 
 	  })); 
 
       var node = new MeasureNode({
@@ -358,33 +369,38 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
     },
 	
 	_addMeasurePoint: function(evt) {
-	  this._currentMeasurePair.push({ 
+	  if (!this._currentMeasurePair.mode) {
+		this._currentMeasurePair.mode = this._measureMode;
+		this._currentMeasurePair.uid = new Date().getTime();
+		this._currentMeasurePair.points = []; 
+	  }
+	  this._currentMeasurePair.points.push({ 
 		'x': evt.mapPoint.x, 
 		'y': evt.mapPoint.y, 
 		'spatialReference': evt.mapPoint.spatialReference
 	  }); 
 	  if (this._measureMode == 'point') {
 		// add an extra point to create buffer
-		var bufferPoint = lang.clone(this._currentMeasurePair[0]); 
+		var bufferPoint = lang.clone(this._currentMeasurePair.points[0]); 
 		bufferPoint.x = bufferPoint.x + (bufferPoint.x / this._bufferDistance);
 		bufferPoint.y = bufferPoint.y + (bufferPoint.y / this._bufferDistance);
-		this._currentMeasurePair.push(bufferPoint); 
+		this._currentMeasurePair.points.push(bufferPoint); 
 	  }
-	  if (this._currentMeasurePair.length % 2 == 0) {
-		this._calculateMValue(this._currentMeasurePair).then(
+	  if (this._currentMeasurePair.points.length % 2 == 0) {
+		this._calculateMValue(this._currentMeasurePair.points).then(
 		  lang.hitch(this, function(results) {
 			if (results.start && results.end) {
-			  this._currentMeasurePair[0].m = results.start; 
-			  this._currentMeasurePair[1].m = results.end;
+			  this._currentMeasurePair.points[0].m = results.start; 
+			  this._currentMeasurePair.points[1].m = results.end;
 			} else if (results.distance) {
-			  this._currentMeasurePair[0].m = 0; 
-			  this._currentMeasurePair[1].m = results.distance; 
+			  this._currentMeasurePair.points[0].m = 0; 
+			  this._currentMeasurePair.points[1].m = results.distance; 
 			} else {
 			  console.error(this.nls.invalidCalculationResult); 
 			  return; 
 			}
-			this._createMeasurePair(this._currentMeasurePair, this._measureMode); 
-			this._currentMeasurePair = []; 
+			this._createMeasurePair(this._currentMeasurePair); 
+			this._currentMeasurePair = {}; 
 			
 			this.displayMeasures(); 
 		  }), lang.hitch(this, function(error) { 
@@ -393,10 +409,10 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 	  }		  
 	}, 
 
-    _createMeasurePair: function(measurePair, measureMode){
+    _createMeasurePair: function(measurePair){
       this._measureArray.push(lang.clone(measurePair));
       
-	  this._createMeasureNode(measurePair, measureMode);
+	  this._createMeasureNode(measurePair);
       this._saveAllToLocalCache();
       this.resize();
     },
@@ -442,23 +458,28 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
       }, this);
 
       this._switchDeleteBtn();
+	  
+	  if (measurePair.mode == "point") {
+        this.map.centerAndZoom(measurePair.points[0], 18);
+	  } else if (measurePair.mode == "line") {
+        //require the module on demand
+        require(['esri/geometry/Extent'], lang.hitch(this, function(Extent){
+		  var ext, sr; 
+		  if (measurePair.extent) {
+		    ext = measurePair.extent; 
+		  } else {
+		    ext = new Extent(
+		      Math.min(measurePair.points[0].x, measurePair.points[1].x), 
+			  Math.min(measurePair.points[0].y, measurePair.points[1].y), 
+			  Math.max(measurePair.points[0].x, measurePair.points[1].x), 
+			  Math.max(measurePair.points[0].y, measurePair.points[1].y), 
+			  this.map.spatialReference
+		    ); 
+		  }
+		  this.map.setExtent(ext.expand(3));
+        }));
+	  }
 
-      //require the module on demand
-      require(['esri/geometry/Extent'], lang.hitch(this, function(Extent){
-		var ext, sr; 
-		if (measurePair.extent) {
-		  ext = measurePair.extent; 
-		} else {
-		  ext = new Extent(
-		    Math.min(measurePair[0].x, measurePair[1].x), 
-			Math.min(measurePair[0].y, measurePair[1].y), 
-			Math.max(measurePair[0].x, measurePair[1].x), 
-			Math.max(measurePair[0].y, measurePair[1].y), 
-			this.map.spatialReference
-		  ); 
-		}
-        this.map.setExtent(ext.expand(3));
-      }));
     }
   });
 	
