@@ -460,7 +460,8 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
       this._switchDeleteBtn();
 	  
 	  if (measurePair.mode == "point") {
-        this.map.centerAndZoom(measurePair.points[0], 18);
+		var mPt = measurePair.points[0]; 
+        this.map.centerAndZoom(new Point(mPt.x, mPt.y, this.map.spatialReference), 18);
 	  } else if (measurePair.mode == "line") {
         //require the module on demand
         require(['esri/geometry/Extent'], lang.hitch(this, function(Extent){
