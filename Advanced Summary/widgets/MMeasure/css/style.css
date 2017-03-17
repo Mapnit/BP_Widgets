@@ -17,7 +17,17 @@
   margin-top: 7px;
   overflow: visible;
 }
-.lsg-widget-mmeasure .add-measure {
+.lsg-widget-mmeasure .add-point-measure {
+	float: left;
+	width: 35px;
+	height: 35px; 
+	border: none;
+	margin-right: 20px;
+	background-image: url("../images/BlueShinyPin.png");
+	background-size: 35px;
+	cursor:pointer;
+}
+.lsg-widget-mmeasure .add-line-measure {
 	float: left;
 	width: 35px;
 	height: 35px; 

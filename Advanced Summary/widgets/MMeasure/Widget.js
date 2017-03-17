@@ -73,16 +73,30 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 		this._graphicsLayer.clear(); 
 		this.displayMeasures();
 	  }))); 
-	  this.own(on(this.btnAddMeasure, 'click', lang.hitch(this, function() {
-		// check the feature select button
-		domClass.add(this.btnAddMeasure, 'lsgChecked');
+	  this.own(on(this.btnAddPointMeasure, 'click', lang.hitch(this, function() {
+		// single-point click
+		domClass.add(this.btnAddPointMeasure, 'lsgChecked');
+		domClass.remove(this.btnAddLineMeasure, 'lsgChecked');
+		this._measureMode = 'point'; 
 	  }))); 
-	  this.own(on(this.btnAddMeasure, 'mouseover', lang.hitch(this, function() {
-		domClass.add(this.btnAddMeasure, 'lsgHovered');
+	  this.own(on(this.btnAddPointMeasure, 'mouseover', lang.hitch(this, function() {
+		domClass.add(this.btnAddPointMeasure, 'lsgHovered');
 	  }))); 
-	  this.own(on(this.btnAddMeasure, 'mouseout', lang.hitch(this, function() {
-		domClass.remove(this.btnAddMeasure, 'lsgHovered');
+	  this.own(on(this.btnAddPointMeasure, 'mouseout', lang.hitch(this, function() {
+		domClass.remove(this.btnAddPointMeasure, 'lsgHovered');
 	  }))); 
+	  this.own(on(this.btnAddLineMeasure, 'click', lang.hitch(this, function() {
+		// two-point clicks
+		domClass.add(this.btnAddLineMeasure, 'lsgChecked');
+		domClass.remove(this.btnAddPointMeasure, 'lsgChecked');
+		this._measureMode = 'line'; 
+	  }))); 
+	  this.own(on(this.btnAddLineMeasure, 'mouseover', lang.hitch(this, function() {
+		domClass.add(this.btnAddLineMeasure, 'lsgHovered');
+	  }))); 
+	  this.own(on(this.btnAddLineMeasure, 'mouseout', lang.hitch(this, function() {
+		domClass.remove(this.btnAddLineMeasure, 'lsgHovered');
+	  }))); 	  
 	  this.own(on(this.map, 'click', lang.hitch(this, this._addMeasurePoint))); 
     },
 	
