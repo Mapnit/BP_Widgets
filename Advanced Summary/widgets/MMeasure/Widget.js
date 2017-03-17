@@ -40,6 +40,8 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 
     currentIndex: -1,
 	
+	_bufferDistance: 1000 * 1000000, 
+	
 	mLayerDS: null, 
 
     //use this flag to control delete button
@@ -80,6 +82,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 		domClass.add(this.btnAddPointMeasure, 'lsgChecked');
 		domClass.remove(this.btnAddLineMeasure, 'lsgChecked');
 		this._measureMode = 'point'; 
+		this._currentMeasurePair = [];
 	  }))); 
 	  this.own(on(this.btnAddPointMeasure, 'mouseover', lang.hitch(this, function() {
 		domClass.add(this.btnAddPointMeasure, 'lsgHovered');
@@ -92,6 +95,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 		domClass.add(this.btnAddLineMeasure, 'lsgChecked');
 		domClass.remove(this.btnAddPointMeasure, 'lsgChecked');
 		this._measureMode = 'line'; 
+		this._currentMeasurePair = [];
 	  }))); 
 	  this.own(on(this.btnAddLineMeasure, 'mouseover', lang.hitch(this, function() {
 		domClass.add(this.btnAddLineMeasure, 'lsgHovered');
@@ -271,7 +275,7 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 			deferred.resolve({'start':mStart, 'end':mEnd, 'distance':mDistance});
 		  }
 		}
-		// 
+		// reject non-parseable results
 		deferred.reject({'message':'invalid calculation results'}); 
 	  }), lang.hitch(this, function(error) {
 		deferred.reject(error); 
@@ -376,6 +380,13 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 		'y': evt.mapPoint.y, 
 		'spatialReference': evt.mapPoint.spatialReference
 	  }); 
+	  if (this._measureMode == 'point') {
+		// add an extra point to create buffer
+		var bufferPoint = lang.clone(this._currentMeasurePair[0]); 
+		bufferPoint.x = bufferPoint.x + (bufferPoint.x / this._bufferDistance);
+		bufferPoint.y = bufferPoint.y + (bufferPoint.y / this._bufferDistance);
+		this._currentMeasurePair.push(bufferPoint); 
+	  }
 	  if (this._currentMeasurePair.length % 2 == 0) {
 		this._calculateMValue(this._currentMeasurePair).then(
 		  lang.hitch(this, function(results) {
@@ -389,20 +400,20 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 			  console.error(this.nls.invalidCalculationResult); 
 			  return; 
 			}
-			this._createMeasurePair(this._currentMeasurePair); 
+			this._createMeasurePair(this._currentMeasurePair, this._measureMode); 
 			this._currentMeasurePair = []; 
 			
 			this.displayMeasures(); 
 		  }), lang.hitch(this, function(error) { 
 		    console.error(error.message || this.nls.calculationFailed); 
 		  })); 
-	  }	
+	  }		  
 	}, 
 
-    _createMeasurePair: function(measurePair){
+    _createMeasurePair: function(measurePair, measureMode){
       this._measureArray.push(lang.clone(measurePair));
       
-	  this._createMeasureNode(measurePair);
+	  this._createMeasureNode(measurePair, measureMode);
       this._saveAllToLocalCache();
       this.resize();
     },
