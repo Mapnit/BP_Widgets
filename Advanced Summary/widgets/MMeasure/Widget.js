@@ -15,16 +15,17 @@ define([
   'esri/geometry/Point', 
   'esri/layers/GraphicsLayer', 
   'esri/symbols/SimpleLineSymbol', 
-  'esri/symbols/SimpleMarkerSymbol',  
+  'esri/symbols/SimpleMarkerSymbol', 
   'esri/SpatialReference',
   'esri/tasks/Geoprocessor',
   './MeasureNode',
+  'dijit/ProgressBar',
   'jimu/dijit/TileLayoutContainer',
   'jimu/utils',
   'libs/storejs/store'
 ],
-function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on, aspect, Deferred, string,
-  Graphic, Point, GraphicsLayer, SimpleLineSymbol, SimpleMarkerSymbol, SpatialReference, Geoprocessor, MeasureNode, TileLayoutContainer, utils, store) {
+function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on, aspect, Deferred, string, 
+  Graphic, Point, GraphicsLayer, SimpleLineSymbol, SimpleMarkerSymbol, SpatialReference, Geoprocessor, MeasureNode, ProgressBar, TileLayoutContainer, utils, store) {
   return declare([BaseWidget], {
     //these two properties is defined in the BaseWidget
     baseClass: 'lsg-widget-mmeasure',
@@ -56,12 +57,17 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 
       this.measureList = new TileLayoutContainer({
         strategy: 'fixWidth',
-        itemSize: {width: 240, height: 80}, //image size is: 100*60,
+        itemSize: {width: 280, height: 80}, 
         hmargin: 15,
         vmargin: 5
       }, this.measureListNode);
 
       this.measureList.startup();
+	  
+      this.progressBar = new ProgressBar({
+        indeterminate: true
+      }, this.progressbar);
+      domStyle.set(this.progressBar.domNode, 'display', 'none');
 
 	  this._graphicsLayer = new GraphicsLayer({
 		id: this.baseClass + "_graphics"
@@ -177,7 +183,8 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 	},
 
 	_calculateMValue: function(measurePts) {
-	  console.debug("call the M-value service"); 
+	  domStyle.set(this.progressBar.domNode, 'display', 'block');
+	  console.debug("call the M-value service"); 	  
 	  var deferred = new Deferred();
 	  var gp = new Geoprocessor(this.config.calculateMServiceUrl);
 	  var params = {
@@ -260,8 +267,10 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
 		}
 		// reject non-parseable results
 		deferred.reject({'message':'invalid calculation results'}); 
+	    domStyle.set(this.progressBar.domNode, 'display', 'none');
 	  }), lang.hitch(this, function(error) {
 		deferred.reject(error); 
+		domStyle.set(this.progressBar.domNode, 'display', 'none');
 	  })); 
 	  
       return deferred.promise;
