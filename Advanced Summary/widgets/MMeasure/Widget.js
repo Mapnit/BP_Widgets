@@ -14,8 +14,8 @@ define([
   'esri/graphic', 
   'esri/geometry/Point', 
   'esri/layers/GraphicsLayer', 
-  'esri/symbols/SimpleLineSymbol', 
   'esri/symbols/SimpleMarkerSymbol', 
+  'esri/symbols/PictureMarkerSymbol', 
   'esri/SpatialReference',
   'esri/tasks/Geoprocessor',
   './MeasureNode',
@@ -25,7 +25,8 @@ define([
   'libs/storejs/store'
 ],
 function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on, aspect, Deferred, string, 
-  Graphic, Point, GraphicsLayer, SimpleLineSymbol, SimpleMarkerSymbol, SpatialReference, Geoprocessor, MeasureNode, ProgressBar, TileLayoutContainer, utils, store) {
+  Graphic, Point, GraphicsLayer, SimpleMarkerSymbol, PictureMarkerSymbol, SpatialReference, 
+  Geoprocessor, MeasureNode, ProgressBar, TileLayoutContainer, utils, store) {
   return declare([BaseWidget], {
     //these two properties is defined in the BaseWidget
     baseClass: 'lsg-widget-mmeasure',
@@ -293,9 +294,29 @@ function(declare, lang, array, domStyle, domClass, domConstruct, BaseWidget, on,
     },
 	
 	plotMeasuresOnMap: function(measurePair) {
+		/*
 		var startMarker = new SimpleMarkerSymbol(this.config.startMarkerSymbol);
 		var endMarker = new SimpleMarkerSymbol(this.config.endMarkerSymbol);
 		var pointMarker = new SimpleMarkerSymbol(this.config.pointMarkerSymbol);
+		 */
+		var startMarker = new PictureMarkerSymbol({
+		  "url":this.config.startMarkerImage,
+		  "height":16,
+		  "width":16,
+		  "type":"esriPMS"
+	    }); 
+		var endMarker = new PictureMarkerSymbol({
+		  "url":this.config.endMarkerImage,
+		  "height":16,
+		  "width":16,
+		  "type":"esriPMS"
+	    }); 
+		var pointMarker = new PictureMarkerSymbol({
+		  "url":this.config.pointMarkerImage,
+		  "height":16,
+		  "width":16,
+		  "type":"esriPMS"
+	    }); 
 		array.forEach(measurePair.points, lang.hitch(this, function(mPt, i) {
 			if (measurePair.mode == 'line') {
 			  this._graphicsLayer.add(new Graphic(
