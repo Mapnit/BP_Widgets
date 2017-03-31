@@ -7,4 +7,61 @@
     <br/>
     <div data-dojo-attach-point="mLayerTable" data-dojo-type="jimu/dijit/SimpleTable" data-dojo-props='fields:[{name: "layer",title: "${nls.layerName}","class":"layer-name",type:"empty"},{name:"dataSource",title: "${nls.dataSource}","class":"data-source",type:"empty"},{name:"actions",title: "${nls.actions}","class":"actions",type:"actions",actions: ["up", "down", "delete"]}]'></div>
   </div>
+  <hr/>
+  <div class="url-section">
+      <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
+        <tbody>
+          <tr>
+			<td style="width:200px">
+			  <span class="label jimu-float-leading" title="${nls.taskUrl}">${nls.taskUrl}</span>
+			</td>
+            <td style="width:auto;">
+              <input type="text" data-dojo-type="jimu/dijit/ServiceURLInput" data-dojo-attach-point="taskUrlInput" data-dojo-props='style:{width:"100%"}' required="true"/>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+  <div class="url-section">
+      <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
+        <tbody>
+          <tr>
+			<td style="width:200px">
+			  <span class="label jimu-float-leading" title="${nls.startImgUrl}">${nls.startImgUrl}</span>
+			</td>
+            <td style="width:auto;">
+              <input type="text" data-dojo-type="jimu/dijit/URLInput" data-dojo-attach-point="startImgUrlInput" data-dojo-props='style:{width:"100%"}' required="true"/>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>  
+  <div class="url-section">
+      <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
+        <tbody>
+          <tr>
+			<td style="width:200px">
+			  <span class="label jimu-float-leading" title="${nls.endImgUrl}">${nls.endImgUrl}</span>
+			</td>
+            <td style="width:auto;">
+              <input type="text" data-dojo-type="jimu/dijit/URLInput" data-dojo-attach-point="endImgUrlInput" data-dojo-props='style:{width:"100%"}' required="true"/>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div> 
+  <div class="url-section">
+      <table cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
+        <tbody>
+          <tr>
+			<td style="width:200px">
+			  <span class="label jimu-float-leading" title="${nls.pointImgUrl}">${nls.pointImgUrl}</span>
+			</td>
+            <td style="width:auto;">
+              <input type="text" data-dojo-type="jimu/dijit/URLInput" data-dojo-attach-point="pointImgUrlInput" data-dojo-props='style:{width:"100%"}' required="true"/>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </div> 
 </div>

@@ -28,7 +28,9 @@ define([
     'dijit/form/ValidationTextBox',
     'jimu/BaseWidgetSetting',
     'jimu/dijit/Message',
-    'jimu/dijit/SimpleTable'
+    'jimu/dijit/SimpleTable',	
+	'jimu/dijit/ServiceURLInput',
+	'jimu/dijit/URLInput'
   ],
   function(
     declare, array, html, lang,
@@ -65,6 +67,12 @@ define([
         this.config = config;
 		
 		this._populateMLayerTable(); 
+		
+		this.taskUrlInput.set('value', this.config.calculateMServiceUrl); 
+		
+		this.startImgUrlInput.set('value', this.config.startMarkerImage); 
+		this.endImgUrlInput.set('value', this.config.endMarkerImage); 
+		this.pointImgUrlInput.set('value', this.config.pointMarkerImage); 		
       },
 	  
 	  _setMLayerOptions: function() {
@@ -180,6 +188,12 @@ define([
         }));
 		
         this.config.mLayers = mLayers;
+		
+		this.config.calculateMServiceUrl = this.taskUrlInput.get('value'); 
+		
+		this.config.startMarkerImage = this.startImgUrlInput.get('value'); 
+		this.config.endMarkerImage = this.endImgUrlInput.get('value'); 
+		this.config.pointMarkerImage = this.pointImgUrlInput.get('value'); 
 
         return this.config;
       }

@@ -27,3 +27,14 @@
   margin-left: 7px;
   text-decoration: underline;
 }
+
+.lsg-widget-mmeasure-setting .url-section {
+  position: relative;
+  height: 40px;
+}
+
+.lsg-widget-mmeasure-setting .url-section .label {
+  top:10px;
+  width: 200px;
+  vertical-align: text-bottom; 
+}
