@@ -1,0 +1,16 @@
+{
+  "mLayers": [
+    {
+      "layerName": "Wells_8871",
+      "dataSource": "SDE.Schema.Table_name"
+    },
+    {
+      "layerName": "Wells_8871",
+      "dataSource": "WestWoodSDE_01.DBO.SMP2_ConstructionLine"
+    }
+  ],
+  "calculateMServiceUrl": "http://gis2.logicsolutionsgroup.com:6080/arcgis/rest/services/Logic_Demo/AdvancedM/GPServer/Advanced%20M",
+  "startMarkerImage": "http://cliang-w530:3344/webappbuilder/apps/2/widgets/MMeasure/images/start.png",
+  "endMarkerImage": "http://cliang-w530:3344/webappbuilder/apps/2/widgets/MMeasure/images/end.png",
+  "pointMarkerImage": "http://cliang-w530:3344/webappbuilder/apps/2/widgets/MMeasure/images/single.png"
+}
