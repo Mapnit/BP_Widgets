@@ -30,7 +30,7 @@
 			  <span class="label jimu-float-leading" title="${nls.startImgUrl}">${nls.startImgUrl}</span>
 			</td>
             <td style="width:auto;">
-              <input type="text" data-dojo-type="jimu/dijit/URLInput" data-dojo-attach-point="startImgUrlInput" data-dojo-props='style:{width:"100%"}' required="true"/>
+			  <input type="text" data-dojo-attach-point="startImgUrlInput" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="regExp:dojox.validate.regexp.url, invalidMessage:'${nls.invalidUrl}', style:{width:'100%'}" required="true"/>
             </td>
           </tr>
         </tbody>
@@ -44,7 +44,7 @@
 			  <span class="label jimu-float-leading" title="${nls.endImgUrl}">${nls.endImgUrl}</span>
 			</td>
             <td style="width:auto;">
-              <input type="text" data-dojo-type="jimu/dijit/URLInput" data-dojo-attach-point="endImgUrlInput" data-dojo-props='style:{width:"100%"}' required="true"/>
+			  <input type="text" data-dojo-attach-point="endImgUrlInput" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="regExp:dojox.validate.regexp.url, invalidMessage:'${nls.invalidUrl}', style:{width:'100%'}" required="true"/>
             </td>
           </tr>
         </tbody>
@@ -58,7 +58,7 @@
 			  <span class="label jimu-float-leading" title="${nls.pointImgUrl}">${nls.pointImgUrl}</span>
 			</td>
             <td style="width:auto;">
-              <input type="text" data-dojo-type="jimu/dijit/URLInput" data-dojo-attach-point="pointImgUrlInput" data-dojo-props='style:{width:"100%"}' required="true"/>
+			  <input type="text" data-dojo-attach-point="pointImgUrlInput" data-dojo-type="dijit/form/ValidationTextBox" data-dojo-props="regExp:dojox.validate.regexp.url, invalidMessage:'${nls.invalidUrl}', style:{width:'100%'}" required="true"/>
             </td>
           </tr>
         </tbody>

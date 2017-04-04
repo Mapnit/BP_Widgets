@@ -8,6 +8,7 @@ define({
 	startImgUrl: "Image for Starting Point", 	
 	endImgUrl: "Image for Ending Point", 
 	pointImgUrl: "Image for Single Point", 
-    missingLayerInWebMap: "Please add M-enabled layers to webmap."
+    missingLayerInWebMap: "Please add M-enabled layers to webmap.", 
+	invalidUrl: "Invalid URL"
   })
 });
