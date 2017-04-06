@@ -265,22 +265,9 @@
         "version": "1.1.2",
         "id": "widgets_ElevationProfile_Widget_20",
         "name": "ElevationProfile",
-        "index": 5,
-        "IsController": false 
-      },
-      {
-        "name": "MMeasure",
-        "label": "M Measure",
-        "version": "2.3",
-        "uri": "widgets/MMeasure/Widget",
-        "config": "configs/MMeasure/config_M Measure.json",
-        "index": 8,
-        "id": "widgets_MMeasure_Widget_21",
-        "icon": "widgets/MMeasure/images/icon.png?wab_dv=2.1",
-        "position": {
-          "relativeTo": "map"
-        }
-      }
+        "index": 5,		
+        "config": "configs/ElevationProfile/config_Elevation Profile.json"
+	  }
     ],
     "groups": []
   },
