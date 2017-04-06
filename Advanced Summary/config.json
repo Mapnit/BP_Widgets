@@ -250,15 +250,15 @@
         "index": 3
       },
       {
-        "name": "Summary",
+        "name": "AdvancedSummary",
         "version": "2.3",
-        "uri": "widgets/Summary/Widget",
+        "uri": "widgets/AdvancedSummary/Widget",
         "index": 4,
-        "id": "widgets_Summary_Widget_19",
+        "id": "widgets_AdvancedSummary_Widget_19",
         "position": {
           "relativeTo": "map"
         },
-        "config": "configs/Summary/config_Summary.json"
+        "config": "configs/AdvancedSummary/config_AdvancedSummary.json"
       },
 	  {
         "uri": "widgets/ElevationProfile/Widget",

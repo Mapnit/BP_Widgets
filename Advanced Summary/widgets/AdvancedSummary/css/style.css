@@ -1,0 +1,366 @@
+.lsg-widget-summary {
+  color: #ffffff !important;
+  background-color: #4c4c4c;
+  left: 0px !important;
+  right: 0px !important;
+  bottom: 0px;
+  height: 140px !important;
+  display: block;
+  /*z-index: 100 !important;*/
+}
+
+.lsg-widget-summary .panelBottom {
+  position: absolute;
+  width: 100%;
+  height: 140px;
+  left: 0px;
+  top: 0px;
+  text-align: center;
+  padding: 0px;
+}
+
+.lsg-widget-summary #panelMessage {
+  position: absolute;
+  top: 0px;
+  text-align: center;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  display: none;
+}
+
+.lsg-widget-summary #panelMain {
+  position: absolute;
+  width: 100%;
+  height: 80px;
+  left: 0px;
+  top: 0px;
+  text-align: center;
+  padding: 0px;
+}
+
+.lsg-widget-summary #panelContainer {
+  margin: auto;
+  width: 100%;
+  max-width: 880px;
+  height: 80px;
+  overflow: hidden;
+  padding-top: 0px;
+}
+
+.lsg-widget-summary .col {
+  position: relative;
+  width: 219px;
+  height: 80px;
+  padding: 0px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+  display: none;
+  text-align: center;
+  float: left;
+}
+
+.jimu-rtl .lsg-widget-summary .col {
+  float: right;
+}
+
+.lsg-widget-summary .line {
+  border-left: 1px solid #ffffff;
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.jimu-rtl .lsg-widget-summary .line {
+  border-left: none;
+  border-right: 1px solid #ffffff;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.lsg-widget-summary .titleCounter {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  right: 10px;
+  height: 15px;
+  font-weight: bold;
+  line-height: 15px;
+  letter-spacing: 1px;
+  text-align: right;
+  display: block;
+  overflow: hidden;
+}
+
+.lsg-widget-summary .counter {
+  position: absolute;
+  top: 20px;
+  left: 7px;
+  width: 204px;
+  height: 40px;
+  display: block;
+}
+
+.lsg-widget-summary .units {
+  position: absolute;
+  bottom: 0px;
+  left: 10px;
+  right: 109px;
+  height: 15px;
+  font-weight: normal;
+  line-height: 15px;
+  letter-spacing: 1px;
+  text-align: right;
+  display: block;
+}
+/* COUNTER */
+
+.lsg-widget-summary .counter_character {
+  display: inline;
+  float: left;
+  position: relative;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.lsg-widget-summary .counter_character_left {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.lsg-widget-summary .counter_character_inner {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.lsg-widget-summary .counter_character_right {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.lsg-widget-summary .counter_marker {
+  position: relative;
+  z-index: 10;
+}
+/* Navigation */
+
+.lsg-widget-summary #panelNav {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  left: 0px;
+  bottom: 40px;
+  padding: 0px;
+  line-height: 20px;
+}
+
+.lsg-widget-summary .navigation {
+  list-style-type: none;
+  width: 60px;
+  height: 20px;
+  margin: auto;
+  padding: 0px;
+}
+
+.lsg-widget-summary .navigation li {
+  width: 20px;
+  height: 20px;
+  float: left;
+  background: url(images/dot.png);
+}
+
+.jimu-rtl .lsg-widget-summary .navigation li {
+  float: right;
+}
+
+.lsg-widget-summary .navigation li:hover {
+  background: url(images/doton.png);
+}
+
+.lsg-widget-summary .navigation li.active {
+  background: url(images/doton.png);
+}
+
+.lsg-widget-summary #panelFooter {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #3d3d3d;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #353535;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.lsg-widget-summary #panelLabel {
+  position: absolute;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 0 0 10px;
+  text-align: left;
+  display: block;
+  font-size: 16px;
+}
+
+.jimu-rtl .lsg-widget-summary #panelLabel {
+  text-align: right;
+  padding: 0 10px 0;
+}
+
+.lsg-widget-summary #panelClose {
+  position: absolute;
+  left: auto;
+  right: 0px;
+  width: 24px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  display: block;
+  cursor: pointer;
+  background-image: url('images/x.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 18px;
+}
+
+.jimu-rtl .lsg-widget-summary #panelClose {
+  position: absolute;
+  left: 0px;
+  right: auto;
+}
+
+.lsg-widget-summary #panelFooterContent {
+  position: absolute;
+  left: auto;
+  right: 24px;
+  height: 40px;
+  line-height: 40px;
+  text-align: right;
+  display: none;
+}
+
+.jimu-rtl .lsg-widget-summary #panelFooterContent {
+  position: absolute;
+  left: 24px;
+  right: auto;
+  text-align: left;
+}
+
+.lsg-widget-summary #panelRefreshInterval {
+  float: right;
+  position: relative;
+  margin: 5px 10px 5px 10px;
+  width: 160px;
+  height: 30px;
+  overflow: hidden;
+  background-color: #353535;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  border-radius: 4px;
+}
+
+.jimu-rtl .lsg-widget-summary #panelRefreshInterval {
+  float: left;
+}
+
+#labelRefresh {
+  display: inline-block;
+}
+
+#labelRefreshIntervalUnit {
+  display: inline-block;
+}
+
+.lsg-widget-summary #panelFilter {
+  float: right;
+  position: relative;
+  margin: 5px 10px 5px 10px;
+  width: 350px;
+  height: 30px;
+  overflow: hidden;
+  background-color: #353535;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+  border-radius: 4px;
+}
+
+.jimu-rtl .lsg-widget-summary #panelFilter {
+  float: left;
+}
+
+#labelFilter {
+  display: inline-block;
+}
+
+.lsg-widget-summary #selFilterField {
+	/*
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 0px;
+    */
+  color: #ffffff;
+  outline: transparent;
+  background: transparent;
+  width: 100px;
+  padding: 0px 0px 0px 5px;
+  font-size: 14px;
+  line-height: 1;
+  border: none;
+  border-radius: 0;
+  height: 30px;
+}
+
+.lsg-widget-summary #selFilter {
+	/*
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 0px;
+     */
+  color: #ffffff;
+  outline: transparent;
+  background: transparent;
+  width: 200px;
+  padding: 0px 0px 0px 5px;
+  font-size: 14px;
+  line-height: 1;
+  border: none;
+  border-radius: 0;
+  height: 30px;
+}
+
+.lsg-widget-summary option {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* css for spatial filter */
+.draw-item{
+  width:48px;
+  height:48px;
+  background-repeat: no-repeat;
+  text-align: center;
+  float: left;
+  margin: 7px;
+}
+
+.extent-icon {
+  background-image: url(images/draw_extent.png); 
+}
+
+.freehand-polygon-icon {
+  background-image: url(images/draw_freehand_polygon.png);
+}
+
+.selected {
+  background-color: #C0C0C0;
+}
+
+@media only screen and (max-width: 500px) {
+  #panelLabel {
+    display: none !important;
+  }
+  #labelFilter {
+    display: none !important;
+  }
+}
