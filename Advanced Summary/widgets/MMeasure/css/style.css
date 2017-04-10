@@ -23,7 +23,7 @@
 	height: 35px; 
 	border: none;
 	margin-right: 20px;
-	background-image: url("../images/BlueShinyPin.png");
+	background-image: url("../images/point.png");
 	background-size: 35px;
 	cursor:pointer;
 }
@@ -33,7 +33,7 @@
 	height: 35px; 
 	border: none;
 	margin-right: 20px;
-	background-image: url("../images/featureclick.png");
+	background-image: url("../images/line.png");
 	background-size: 35px;
 	cursor:pointer;
 }
