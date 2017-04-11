@@ -124,7 +124,8 @@ define([
                   value: lyr.id
                 });
               }
-            } else if (opLayer.layerObject) {
+            } else if (opLayer.layerObject 
+				&& opLayer.layerObject.geometryType === "esriGeometryPoint") {
               options.push({
                 label: opLayer.title, //opLayer.layerObject.name,
                 value: opLayer.id
