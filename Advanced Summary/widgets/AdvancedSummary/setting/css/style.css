@@ -1,7 +1,7 @@
 .filter-group {
     padding: 5px;
     margin-bottom: 10px;
-	display: none; 
+	display: block; 
 }
 .filter-group > .label {
     display: inline-block;
