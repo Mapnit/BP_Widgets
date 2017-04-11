@@ -5,7 +5,7 @@ define({
     all: "All",
 	refresh: "Refresh", 
 	refreshIntervalUnit: "minute(s)", 
-    missingLayerInWebMap: "No Operational Layers in Web Map.",
+    missingLayerInWebMap: "No Point Feature Layer in Web Map",
     missingSummaryLayerInConfig: "Missing summary layer."
   })
 });

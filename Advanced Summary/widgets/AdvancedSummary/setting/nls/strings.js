@@ -16,7 +16,7 @@ define({
     displayCluster: "Display as Summary Clusters",
     showFeatureCount: "Show Feature Count",
     featureCountLabel: "Feature Count Label",
-    missingLayerInWebMap: "Please add summary layers to webmap.",
+    missingLayerInWebMap: "No point feature layer in the webmap",
     refreshInterval: "Refresh Interval (Minutes)"
   })
 });
