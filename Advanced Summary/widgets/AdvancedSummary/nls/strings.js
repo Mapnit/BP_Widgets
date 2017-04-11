@@ -1,6 +1,6 @@
 define({
   root: ({
-    _widgetLabel: "Summary",
+    _widgetLabel: "Advanced Summary",
     filter: "Filter",
     all: "All",
 	refresh: "Refresh", 
