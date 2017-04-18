@@ -1,3 +1,7 @@
+.lsg-widget-mmeasure-setting .mlayer-section {
+  display: none; 
+}
+
 .lsg-widget-mmeasure-setting .btn-add-mlayer {
   display: inline-block;
   overflow: hidden;
